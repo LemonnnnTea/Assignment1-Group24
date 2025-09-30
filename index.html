@@ -1,10 +1,418 @@
-<!DOCTYPE html>
+<!-- Karoomba! — Theme Party Event Company
+     Single-file prototype: HTML + CSS + JS
+     Features included:
+     - Accessible header/nav, Home, About, Services, Gallery, Booking, Contact, FAQ, Events, Newsletter, Testimonials
+     - Responsive Jello-style centered layout with percentage width
+     - ARIA attributes, form validation, keyboard accessible modals, image placeholders (SVG)
+     - Simple client-side booking form that validates and summarizes submission
+     - Lightbox gallery, filterable services, events calendar stub, and newsletter subscription
+
+     NOTE: Replace placeholder text, images, and server endpoints as needed.
+-->
+
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>This is a test of the git</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Karoomba! — Theme Party Specialists</title>
+    <meta name="description" content="Karoomba! — themed party planning, decorations, and full-event management." />
+    <style>
+        :root{
+            --brand-1:#FF6B6B; /* vibrant coral */
+            --brand-2:#4ECDC4; /* teal */
+            --dark:#0f1720;
+            --muted:#6b7280;
+            --bg:#fbfdff;
+            --max-width:1100px;
+            --radius:12px;
+            --gap:1rem;
+            --shadow: 0 6px 18px rgba(10,12,16,0.08);
+            --focus: 3px solid rgba(78,205,196,0.18);
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        }
+        /* Reset-ish */
+        *{box-sizing:border-box}
+        html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#f7fbff);color:var(--dark);}
+
+        /* Jello design: centered content with percentage width */
+        .wrap{max-width:var(--max-width);margin:28px auto;padding:20px;width:90%;}
+        header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+        .brand{display:flex;align-items:center;gap:12px}
+        .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--brand-1),var(--brand-2));display:grid;place-items:center;color:white;font-weight:700}
+        .brand h1{font-size:1.2rem;margin:0}
+        nav{display:flex;gap:12px;align-items:center}
+        nav a{padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--dark);font-weight:600}
+        nav a:focus, nav a:hover{outline:none;background:rgba(78,205,196,0.06)}
+
+        /* Hero */
+        .hero{margin-top:18px;background:white;border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;display:grid;grid-template-columns:1fr 360px;gap:20px}
+        .hero .intro h2{margin:0 0 8px 0;font-size:1.6rem}
+        .hero p{margin:0;color:var(--muted)}
+        .cta{display:flex;gap:8px;margin-top:12px}
+        button.primary{background:var(--brand-1);color:white;padding:10px 16px;border-radius:8px;border:none;font-weight:700;cursor:pointer}
+        button.secondary{background:transparent;border:1px solid var(--brand-2);color:var(--brand-2);padding:10px 14px;border-radius:8px;cursor:pointer}
+
+        /* Card grid */
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:20px}
+        .card{background:white;border-radius:12px;padding:14px;box-shadow:var(--shadow)}
+        .card h3{margin:0 0 6px 0}
+        .muted{color:var(--muted);font-size:0.95rem}
+
+        /* Gallery */
+        .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+        .thumb{width:100%;height:140px;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,#eee,#ddd);display:grid;place-items:center}
+
+        /* Forms */
+        label{display:block;font-weight:600;margin-bottom:6px}
+        input[type=text],input[type=email],input[type=date],select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ee;background:white}
+        textarea{min-height:100px}
+        .row{display:flex;gap:12px}
+        .row > *{flex:1}
+
+        /* Footer */
+        footer{margin-top:28px;padding:18px;border-radius:12px;background:#ffffff;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center}
+
+        /* Responsive */
+        @media (max-width:900px){
+            .hero{grid-template-columns:1fr}
+            .gallery-grid{grid-template-columns:repeat(2,1fr)}
+        }
+        @media (max-width:600px){
+            nav{display:none}
+            .hero .intro h2{font-size:1.2rem}
+            .gallery-grid{grid-template-columns:1fr}
+        }
+
+        /* Accessibility focus */
+        a:focus,button:focus,input:focus,select:focus,textarea:focus{outline:none;box-shadow:var(--focus);border-radius:8px}
+
+        /* Simple modal */
+        .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.5);z-index:1000}
+        .modal[open]{display:flex}
+        .modal .panel{background:white;padding:18px;border-radius:12px;max-width:720px;width:92%}
+
+        /* small helpers */
+        .center{display:flex;align-items:center;justify-content:center}
+        .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,0.04);font-weight:700}
+
+        /* testimonials carousel stub */
+        .testi{display:flex;gap:12px;overflow:auto}
+        .testi .t{min-width:220px}
+
+        /* breadcrumbs */
+        .breadcrumbs{font-size:0.9rem;color:var(--muted);margin-bottom:6px}
+    </style>
 </head>
 <body>
-<p>test test</p>
+<div class="wrap" id="top">
+    <header role="banner" aria-label="Karoomba header">
+        <div class="brand">
+            <div class="logo" aria-hidden="true">K</div>
+            <div>
+                <h1 style="margin:0">Karoomba!</h1>
+                <div class="muted">Theme Parties • Events • Fun</div>
+            </div>
+        </div>
+        <nav role="navigation" aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#events">Events</a>
+            <a href="#contact">Contact</a>
+            <a href="#booking">Booking</a>
+        </nav>
+        <div class="center">
+            <button class="primary" id="open-booking">Book Now</button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <main id="home" role="main">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="intro">
+                <div class="breadcrumbs">Home › Parties › Karoomba!</div>
+                <h2 id="hero-title">Make every party an unforgettable Karoomba experience</h2>
+                <p class="muted">We design themed parties for birthdays, weddings, corporate events and more. Full-service planning, decorations, entertainment and on-site coordination.</p>
+                <div class="cta">
+                    <button class="primary" id="cta-book">Get a Quote</button>
+                    <button class="secondary" id="cta-gallery">See our Work</button>
+                </div>
+
+                <div class="grid" style="margin-top:18px">
+                    <div class="card">
+                        <h3>Why choose us?</h3>
+                        <p class="muted">Creative themes, local vendors, and stress-free planning — tailored to your budget.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Custom Packages</h3>
+                        <p class="muted">From simple decor to full production with performers and catering.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Trusted Team</h3>
+                        <p class="muted">Background-checked crew and experienced project managers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <aside aria-label="Quick Booking" role="complementary">
+                <div class="card">
+                    <h3>Quick Booking</h3>
+                    <form id="quick-book" aria-describedby="quick-desc">
+                        <div id="quick-desc" class="muted">Tell us basic details, we'll follow up with a full quote.</div>
+                        <label for="q-name">Name</label>
+                        <input id="q-name" name="name" type="text" required />
+                        <label for="q-email">Email</label>
+                        <input id="q-email" name="email" type="email" required />
+                        <label for="q-theme">Theme</label>
+                        <select id="q-theme" name="theme"><option>Birthday</option><option>Wedding</option><option>Corporate</option><option>Kids</option></select>
+                        <label for="q-date">Date</label>
+                        <input id="q-date" name="date" type="date" />
+                        <div style="margin-top:10px;display:flex;gap:8px">
+                            <button class="primary" type="submit">Request Quote</button>
+                            <button type="button" class="secondary" id="open-contact">Contact Us</button>
+                        </div>
+                    </form>
+                </div>
+            </aside>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" aria-labelledby="services-title" style="margin-top:20px">
+            <h2 id="services-title">Our Services</h2>
+            <p class="muted">We offer a range of services, mix-and-match to build your ideal party.</p>
+            <div style="margin-top:12px">
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                    <button class="pill" data-filter="all">All</button>
+                    <button class="pill" data-filter="decor">Decor</button>
+                    <button class="pill" data-filter="entertainment">Entertainment</button>
+                    <button class="pill" data-filter="catering">Catering</button>
+                    <button class="pill" data-filter="kids">Kids</button>
+                </div>
+            </div>
+            <div class="grid" style="margin-top:12px" id="services-grid">
+                <article class="card" data-type="decor"><h3>Theme Decor</h3><p class="muted">Custom backdrops, balloons, table settings and lighting.</p></article>
+                <article class="card" data-type="entertainment"><h3>Entertainment</h3><p class="muted">DJ, live performers, magicians and character actors for kids' parties.</p></article>
+                <article class="card" data-type="catering"><h3>Catering</h3><p class="muted">Working with local caterers to provide menus for all budgets.</p></article>
+                <article class="card" data-type="kids"><h3>Kids Parties</h3><p class="muted">Age-appropriate activities and safety-certified entertainers.</p></article>
+            </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section id="gallery" aria-labelledby="gallery-title" style="margin-top:20px">
+            <h2 id="gallery-title">Gallery</h2>
+            <p class="muted">A small selection of our favourite events.</p>
+            <div class="gallery-grid" style="margin-top:12px">
+                <!-- placeholder SVG thumbnails with data-index for lightbox -->
+                <div class="thumb" role="button" tabindex="0" data-index="1" aria-label="Open image 1"><svg width="100%" height="100%" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="120" fill="#f0f4f8"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#9aa4b2">Event Photo 1</text></svg></div>
+                <div class="thumb" role="button" tabindex="0" data-index="2" aria-label="Open image 2"><svg width="100%" height="100%" viewBox="0 0 200 120"><rect width="200" height="120" fill="#fef3e0"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#c08700">Event Photo 2</text></svg></div>
+                <div class="thumb" role="button" tabindex="0" data-index="3" aria-label="Open image 3"><svg width="100%" height="100%" viewBox="0 0 200 120"><rect width="200" height="120" fill="#e8fdf5"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#0b8a6f">Event Photo 3</text></svg></div>
+            </div>
+        </section>
+
+        <!-- EVENTS -->
+        <section id="events" aria-labelledby="events-title" style="margin-top:20px">
+            <h2 id="events-title">Upcoming Events</h2>
+            <p class="muted">Book or join public theme events.</p>
+            <div class="grid" style="margin-top:12px">
+                <div class="card"><h3>Retro Dance Night</h3><p class="muted">Sat, Oct 18 • Central Hall • Tickets available</p></div>
+                <div class="card"><h3>Family Carnival</h3><p class="muted">Sun, Nov 2 • Riverside Park • Family-friendly activities</p></div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section id="testimonials" style="margin-top:20px">
+            <h2>Testimonials</h2>
+            <div class="testi" aria-live="polite">
+                <div class="card t"><strong>Anna B.</strong><p class="muted">"Karoomba made my daughter's birthday magical — seamless from start to finish."</p></div>
+                <div class="card t"><strong>Marcus T.</strong><p class="muted">"Professional, creative and within budget."</p></div>
+                <div class="card t"><strong>Leah W.</strong><p class="muted">"Highly recommend for corporate events."</p></div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" style="margin-top:20px">
+            <h2>FAQ</h2>
+            <div class="grid">
+                <div class="card"><h3>How early should I book?</h3><p class="muted">We recommend booking at least 6-8 weeks ahead for weekend dates.</p></div>
+                <div class="card"><h3>Do you provide catering?</h3><p class="muted">Yes — we work with trusted local caterers. Menus can be tailored to dietary needs.</p></div>
+            </div>
+        </section>
+
+        <!-- BOOKING (detailed) -->
+        <section id="booking" aria-labelledby="booking-title" style="margin-top:20px">
+            <h2 id="booking-title">Booking & Enquiry</h2>
+            <p class="muted">Complete this form & we'll contact you with a tailored quote.</p>
+            <div class="card" style="margin-top:12px">
+                <form id="booking-form">
+                    <div class="row">
+                        <div>
+                            <label for="b-name">Full name</label>
+                            <input id="b-name" name="name" type="text" required />
+                        </div>
+                        <div>
+                            <label for="b-phone">Phone</label>
+                            <input id="b-phone" name="phone" type="text" />
+                        </div>
+                    </div>
+                    <label for="b-email">Email</label>
+                    <input id="b-email" name="email" type="email" required />
+                    <label for="b-theme">Theme</label>
+                    <select id="b-theme" name="theme"><option>Birthday</option><option>Wedding</option><option>Corporate</option><option>Custom</option></select>
+                    <div class="row" style="margin-top:8px">
+                        <div>
+                            <label for="b-date">Date</label>
+                            <input id="b-date" name="date" type="date" />
+                        </div>
+                        <div>
+                            <label for="b-people">Number of guests</label>
+                            <input id="b-people" name="people" type="text" />
+                        </div>
+                    </div>
+                    <label for="b-budget">Budget (approx)</label>
+                    <input id="b-budget" name="budget" type="text" placeholder="e.g. $500 - $1500" />
+                    <label for="b-notes">Additional notes</label>
+                    <textarea id="b-notes" name="notes" placeholder="Tell us about your vision..."></textarea>
+                    <div style="margin-top:10px;display:flex;gap:8px">
+                        <button class="primary" type="submit">Send Enquiry</button>
+                        <button type="button" class="secondary" id="reset-booking">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" aria-labelledby="contact-title" style="margin-top:20px">
+            <h2 id="contact-title">Contact</h2>
+            <div class="grid" style="margin-top:12px">
+                <div class="card">
+                    <h3>Get in touch</h3>
+                    <p class="muted">Phone: <a href="tel:+1234567890">+1 234 567 890</a><br>Email: <a href="mailto:hello@karoomba.example">hello@karoomba.example</a></p>
+                    <p class="muted">Address: 12 Party Lane, Palmerston North</p>
+                    <div style="margin-top:8px">
+                        <a href="#" aria-label="Instagram">Instagram</a> • <a href="#" aria-label="Facebook">Facebook</a> • <a href="#" aria-label="TikTok">TikTok</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Newsletter</h3>
+                    <p class="muted">Sign up to get offers and event announcements.</p>
+                    <form id="newsletter">
+                        <label for="n-email">Email</label>
+                        <input id="n-email" name="email" type="email" required />
+                        <div style="margin-top:8px"><button class="primary">Subscribe</button></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer role="contentinfo">
+        <div>© <span id="year"></span> Karoomba! • <small class="muted">Bringing themed parties to life</small></div>
+        <div><a href="#top">Back to top</a></div>
+    </footer>
+
+    <!-- Lightbox modal -->
+    <div class="modal" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+        <div class="panel">
+            <div id="light-content"></div>
+            <div style="margin-top:12px;text-align:right"><button id="close-light" class="secondary">Close</button></div>
+        </div>
+    </div>
+
+    <!-- Simple success modal for booking -->
+    <div class="modal" id="success" role="dialog" aria-modal="true" aria-label="Submission success">
+        <div class="panel">
+            <h3>Thanks — request received</h3>
+            <p class="muted">We'll contact you within 2 business days to confirm details.</p>
+            <div style="margin-top:12px;text-align:right"><button id="close-success" class="primary">Close</button></div>
+        </div>
+    </div>
+
+</div><!-- end wrap -->
+
+<script>
+    // Accessibility helpers & simple interactions
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth anchor scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', e=>{
+            const href = a.getAttribute('href');
+            if(href.length>1){
+                e.preventDefault();
+                document.querySelector(href).scrollIntoView({behavior:'smooth',block:'start'});
+            }
+        });
+    });
+
+    // Open booking modal via quick button
+    const openBooking = document.getElementById('open-booking');
+    const bookingForm = document.getElementById('booking-form');
+    const successModal = document.getElementById('success');
+    const closeSuccess = document.getElementById('close-success');
+
+    openBooking.addEventListener('click', ()=>{document.getElementById('booking').scrollIntoView({behavior:'smooth'})});
+
+    // Quick booking form submission
+    document.getElementById('quick-book').addEventListener('submit', e=>{
+        e.preventDefault();
+        // Basic front-end validation done by browser; show success modal
+        successModal.setAttribute('open','');
+        document.getElementById('success').focus();
+    });
+
+    closeSuccess.addEventListener('click', ()=>{successModal.removeAttribute('open')});
+
+    // Booking form: gather values, basic validation, then show confirmation modal
+    document.getElementById('booking-form').addEventListener('submit', e=>{
+        e.preventDefault();
+        const form = e.target;
+        if(!form.checkValidity()){
+            form.reportValidity();
+            return;
+        }
+        // build summary and (here) just show the success modal
+        successModal.setAttribute('open','');
+    });
+
+    document.getElementById('reset-booking').addEventListener('click', ()=>{document.getElementById('booking-form').reset()});
+
+    // Gallery lightbox
+    document.querySelectorAll('.thumb').forEach(t=>{
+        t.addEventListener('click', openLight);
+        t.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') openLight(e);});
+    });
+    function openLight(e){
+        const idx = e.currentTarget.dataset.index || '1';
+        const content = document.getElementById('light-content');
+        content.innerHTML = '<svg width="100%" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="300" fill="#f6f9fc"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#98a6b4" font-size="28">Event Photo '+idx+'</text></svg>';
+        document.getElementById('lightbox').setAttribute('open','');
+    }
+    document.getElementById('close-light').addEventListener('click', ()=>{document.getElementById('lightbox').removeAttribute('open')});
+    // allow ESC to close modals
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape'){document.getElementById('lightbox').removeAttribute('open');document.getElementById('success').removeAttribute('open')} });
+
+    // Services filter
+    document.querySelectorAll('[data-filter]').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+            const f = btn.dataset.filter;
+            document.querySelectorAll('#services-grid .card').forEach(c=>{
+                if(f==='all' || c.dataset.type===f) c.style.display='block'; else c.style.display='none';
+            });
+        });
+    });
+
+    // Newsletter basic handler
+    document.getElementById('newsletter').addEventListener('submit', e=>{
+        e.preventDefault();
+        const email = document.getElementById('n-email').value;
+        if(!email) return; alert('Thanks — signed up: '+email);
+        document.getElementById('newsletter').reset();
+    });
+
+    // small ARIA: focus trap could be added for real project
+</script>
 </body>
 </html>
