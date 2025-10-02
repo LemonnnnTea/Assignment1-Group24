@@ -30,7 +30,19 @@ nav a:focus, nav a:hover{outline:none;background:rgba(78,205,196,0.06)}
 .row > *{flex:1}
 
 /* Gallery grid */
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 三列 */
+    gap: 10px;
+}
+
+.thumb img {
+    width: 100%;   /* 图片自动缩放到父容器宽度 */
+    height: 200px; /* 固定高度 */
+    object-fit: cover; /* 裁剪方式：填充并居中，不会变形 */
+    border-radius: 8px;
+}
+
 
 /* Footer */
 footer{
