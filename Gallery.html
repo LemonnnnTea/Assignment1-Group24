@@ -3,10 +3,27 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Karoomba! — Theme Party Specialists</title>
-    <meta name="description" content="Karoomba! — themed party planning, decorations, and full-event management." />
+    <title>Karoomba! — Theme Party Gallery</title>
+    <meta name="description" content="Browse our amazing themed party gallery - birthday parties, corporate events, weddings and more!" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/layout.css" />
+    <style>
+        /* Animation for gallery items */
+        .gallery-item {
+            animation: fadeIn 0.6s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
 </head>
 <body>
 <script src="js/script.js"></script>
@@ -22,7 +39,7 @@
         <nav role="navigation" aria-label="Main navigation">
             <a href="index.html">Home</a>
             <a href="Services.html">Services</a>
-            <a href="Gallery.html">Gallery</a>
+            <a href="Gallery.html" aria-current="page">Gallery</a>
             <a href="Events.html">Events</a>
             <a href="Contactus.html">Contact</a>
             <a href="Booking.html">Booking</a>
@@ -31,5 +48,314 @@
             <button class="primary" id="open-booking">Book Now</button>
         </div>
     </header>
+
+    <!-- Breadcrumbs navigation -->
+    <div class="breadcrumbs">
+        <a href="index.html">Home</a> / Gallery
+    </div>
+
+    <!-- Gallery Main Content -->
+    <main>
+        <section class="gallery-intro">
+            <h2>Our Party Gallery</h2>
+            <p>Take a look at some of our amazing themed parties and events we've organized. Click on any image to view it in full size!</p>
+        </section>
+
+        <!-- Gallery Filter Section -->
+        <section class="gallery-filter">
+            <h3>Filter by Category</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Events</button>
+                <button class="filter-btn" data-filter="birthday">Birthday Parties</button>
+                <button class="filter-btn" data-filter="corporate">Corporate Events</button>
+                <button class="filter-btn" data-filter="wedding">Weddings</button>
+                <button class="filter-btn" data-filter="seasonal">Seasonal Parties</button>
+            </div>
+        </section>
+
+        <!-- Gallery Grid with all images -->
+        <section class="gallery-main">
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Birthday Parties Section -->
+                <div class="gallery-item" data-category="birthday">
+                    <img src="imgs/pictures/Gallery/birthday1.jpg" alt="Colorful birthday party with rainbow balloons and decorations" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Rainbow Birthday Bash</h4>
+                        <p>Vibrant colors and fun decorations for all ages</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="birthday">
+                    <img src="imgs/pictures/Gallery/birthday2.jpg" alt="Superhero themed birthday party with costumes" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Superhero Celebration</h4>
+                        <p>Action-packed party with capes and masks</p>
+                    </div>
+                </div>
+
+                <!-- Corporate Events Section -->
+                <div class="gallery-item" data-category="corporate">
+                    <img src="imgs/pictures/Gallery/corporate1.jpg" alt="Elegant corporate gala dinner setting" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Corporate Gala Dinner</h4>
+                        <p>Professional event with formal table settings</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="corporate">
+                    <img src="imgs/pictures/Gallery/corporate2.jpg" alt="Corporate team building outdoor activity" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Team Building Retreat</h4>
+                        <p>Outdoor activities for corporate bonding</p>
+                    </div>
+                </div>
+
+                <!-- Weddings Section -->
+                <div class="gallery-item" data-category="wedding">
+                    <img src="imgs/pictures/Gallery/wedding1.jpg" alt="Romantic garden wedding ceremony setup" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Garden Wedding Ceremony</h4>
+                        <p>Beautiful outdoor wedding with floral arches</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="wedding">
+                    <img src="imgs/pictures/Gallery/wedding2.jpg" alt="Beach wedding with ocean view" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Beach Wedding Celebration</h4>
+                        <p>Sunset ceremony by the ocean</p>
+                    </div>
+                </div>
+
+                <!-- Seasonal Parties - Halloween -->
+                <div class="gallery-item" data-category="seasonal">
+                    <img src="imgs/pictures/Gallery/halloween1.jpg" alt="Spooky Halloween party with pumpkin decorations" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Halloween Spooktacular</h4>
+                        <p>Spooky decorations and costume party</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="seasonal">
+                    <img src="imgs/pictures/Gallery/halloween2.jpg" alt="Halloween haunted house setup" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Haunted House Party</h4>
+                        <p>Creepy haunted mansion theme</p>
+                    </div>
+                </div>
+
+                <!-- Seasonal Parties - Christmas -->
+                <div class="gallery-item" data-category="seasonal">
+                    <img src="imgs/pictures/Gallery/christmas1.jpg" alt="Festive Christmas party with decorated tree" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Christmas Office Party</h4>
+                        <p>Festive corporate holiday celebration</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="seasonal">
+                    <img src="imgs/pictures/Gallery/christmas2.jpg" alt="Christmas family gathering setup" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Family Christmas Gathering</h4>
+                        <p>Cozy family holiday celebration</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="seasonal">
+                    <img src="imgs/pictures/Gallery/christmas3.jpg" alt="Christmas dinner table setting" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Christmas Dinner Party</h4>
+                        <p>Elegant holiday dining experience</p>
+                    </div>
+                </div>
+
+                <!-- Seasonal Parties - Valentine's Day -->
+                <div class="gallery-item" data-category="seasonal">
+                    <img src="imgs/pictures/Gallery/Valentine's day1.jpg" alt="Romantic Valentine's day dinner setup" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Romantic Valentine's Dinner</h4>
+                        <p>Intimate candlelit dinner setting</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="seasonal">
+                    <img src="imgs/pictures/Gallery/Valentine's day2.jpg" alt="Valentine's day party with heart decorations" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Valentine's Day Party</h4>
+                        <p>Heart-themed celebration with friends</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="seasonal">
+                    <img src="imgs/pictures/Gallery/Valentine's day3.jpg" alt="Valentine's day couple celebration" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h4>Couple's Valentine Celebration</h4>
+                        <p>Romantic setup for two</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="gallery-cta">
+            <div class="cta-card">
+                <h3>Ready to Create Your Perfect Party?</h3>
+                <p>Let us bring your vision to life with our expert event planning services.</p>
+                <a href="Booking.html"><button class="primary">Book Your Event Now</button></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Karoomba! All rights reserved.</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="Services.html">Services</a>
+            <a href="Gallery.html">Gallery</a>
+            <a href="Events.html">Events</a>
+            <a href="Contactus.html">Contact</a>
+            <a href="Booking.html">Booking</a>
+        </nav>
+    </footer>
 </div>
+
+<!-- Lightbox Modal for image viewing -->
+<div class="lightbox-modal" id="lightbox">
+    <div class="lightbox-panel">
+        <button class="lightbox-close" id="close-light">×</button>
+        <div class="lightbox-content" id="light-content">
+            <div class="lightbox-loading">Loading image...</div>
+        </div>
+        <div class="lightbox-info">
+            <h3 id="lightbox-title">Image Title</h3>
+            <p id="lightbox-description">Image description will appear here</p>
+            <div class="lightbox-counter">
+                <span id="lightbox-current">1</span> of <span id="lightbox-total">8</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Initialize gallery functionality when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initGallery();
+});
+
+function initGallery() {
+    // Filter functionality - allows users to filter images by category
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            const filter = this.dataset.filter;
+            
+            // Show/hide gallery items based on filter
+            galleryItems.forEach(item => {
+                if (filter === 'all' || item.dataset.category === filter) {
+                    item.style.display = 'block';
+                    item.style.animation = 'fadeIn 0.5s ease';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Lightbox functionality for viewing images in full size
+    const lightbox = document.getElementById('lightbox');
+    const closeLight = document.getElementById('close-light');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxDescription = document.getElementById('lightbox-description');
+    const lightboxCurrent = document.getElementById('lightbox-current');
+    const lightboxTotal = document.getElementById('lightbox-total');
+    
+    let currentImageIndex = 0;
+    let images = [];
+    
+    // Collect all image information for lightbox
+    galleryItems.forEach((item, index) => {
+        const title = item.querySelector('h4').textContent;
+        const description = item.querySelector('p').textContent;
+        const imgSrc = item.querySelector('.gallery-img').src;
+        
+        images.push({
+            title: title,
+            description: description,
+            src: imgSrc,
+            alt: item.querySelector('.gallery-img').alt,
+            index: index
+        });
+        
+        // Add click event to open lightbox when image is clicked
+        item.addEventListener('click', () => {
+            openLightbox(index);
+        });
+    });
+
+    // Function to open lightbox with selected image
+    function openLightbox(index) {
+        currentImageIndex = index;
+        updateLightbox();
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    // Function to close lightbox
+    function closeLightbox() {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+
+    // Update lightbox content with current image
+    function updateLightbox() {
+        const image = images[currentImageIndex];
+        lightboxTitle.textContent = image.title;
+        lightboxDescription.textContent = image.description;
+        lightboxCurrent.textContent = currentImageIndex + 1;
+        lightboxTotal.textContent = images.length;
+        
+        // Display the actual image in lightbox
+        const lightContent = document.getElementById('light-content');
+        lightContent.innerHTML = `
+            <img src="${image.src}" alt="${image.alt}" style="width: 100%; max-height: 500px; object-fit: contain; border-radius: 8px;">
+        `;
+    }
+
+    // Close lightbox when close button is clicked
+    closeLight.addEventListener('click', closeLightbox);
+    
+    // Close lightbox when clicking on the background
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+    
+    // Close lightbox with ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+
+    // Navigation between images using arrow keys
+    document.addEventListener('keydown', function(e) {
+        if (lightbox.style.display === 'flex') {
+            if (e.key === 'ArrowLeft') {
+                // Previous image
+                currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : images.length - 1;
+                updateLightbox();
+            } else if (e.key === 'ArrowRight') {
+                // Next image
+                currentImageIndex = currentImageIndex < images.length - 1 ? currentImageIndex + 1 : 0;
+                updateLightbox();
+            }
+        }
+    });
+
+    console.log('Gallery functionality initialized successfully');
+}
+</script>
+
 </body>
+</html>
