@@ -114,25 +114,143 @@
             background-color: var(--primary-dark);
         }
 
-        /* Hero Section */
+        /* Hero Section - 修复居中问题 */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             padding: 4rem 2rem;
             text-align: center;
-            margin-bottom: 2rem;
+            margin: 0 2rem 2rem 2rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
         }
 
         .hero h1 {
             font-size: 3rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             color: white;
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            margin: 0 auto 2.5rem;
             max-width: 600px;
-            margin: 0 auto 2rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        .hero .primary {
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Party Themes Section */
+        .themes-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        .theme-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .theme-category {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .theme-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .category-header h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-content {
+            padding: 1.5rem;
+        }
+
+        .theme-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .theme-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .theme-list li:last-child {
+            border-bottom: none;
+        }
+
+        .capacity-badge {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .capacity-info {
+            background-color: var(--gray-light);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .capacity-info h4 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
         }
 
         /* Modal Styles */
@@ -241,9 +359,9 @@
         #bottomBookingForm {
             background-color: white;
             padding: 3rem 2rem;
-            margin: 3rem auto;
+            margin: 3rem 2rem;
             border-radius: 12px;
-            max-width: 800px;
+            max-width: calc(100% - 4rem);
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
@@ -375,13 +493,54 @@
                 justify-content: center;
             }
 
+            .hero {
+                margin: 0 1rem 2rem 1rem;
+                padding: 3rem 1.5rem;
+                min-height: 350px;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
             }
 
             .form-row {
                 flex-direction: column;
                 gap: 0;
+            }
+
+            .theme-categories {
+                grid-template-columns: 1fr;
+            }
+
+            #bottomBookingForm {
+                margin: 3rem 1rem;
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                margin: 0 0.5rem 2rem 0.5rem;
+                padding: 2.5rem 1rem;
+                min-height: 300px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            #bottomBookingForm {
+                margin: 2rem 0.5rem;
+                padding: 1.5rem 1rem;
             }
         }
     </style>
@@ -412,9 +571,144 @@
 
 <!-- Hero Section -->
 <section class="hero">
-    <h1>Book Your Perfect Party</h1>
-    <p>Let us create unforgettable memories with our themed parties and events. Fill out the form below to get started!</p>
-    <button class="primary" id="hero-booking">Book Your Party</button>
+    <div class="hero-content">
+        <h1>Book Your Perfect Party</h1>
+        <p>Let us create unforgettable memories with our themed parties and events. Fill out the form below to get started!</p>
+        <button class="primary" id="hero-booking">Book Your Party</button>
+    </div>
+</section>
+
+<!-- Party Themes Section -->
+<section class="themes-section">
+    <h2 class="section-title">Our Party Themes & Capacity Recommendations</h2>
+
+    <div class="theme-categories">
+        <!-- Children's Parties -->
+        <div class="theme-category">
+            <div class="category-header">
+                <h3>Children's Parties</h3>
+                <p>Perfect for young celebrations</p>
+            </div>
+            <div class="category-content">
+                <ul class="theme-list">
+                    <li>Princess Party <span class="capacity-badge">10-20 kids</span></li>
+                    <li>Superhero Adventure <span class="capacity-badge">10-25 kids</span></li>
+                    <li>Pirate Treasure Hunt <span class="capacity-badge">8-15 kids</span></li>
+                    <li>Dinosaur Discovery <span class="capacity-badge">12-20 kids</span></li>
+                    <li>Animal Safari <span class="capacity-badge">10-18 kids</span></li>
+                </ul>
+                <div class="capacity-info">
+                    <h4>Recommended Setup</h4>
+                    <p>Ideal for ages 3-10. Includes themed decorations, games, and age-appropriate activities with 2-3 party facilitators.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teen & Young Adult -->
+        <div class="theme-category">
+            <div class="category-header">
+                <h3>Teen & Young Adult</h3>
+                <p>Cool themes for the youth</p>
+            </div>
+            <div class="category-content">
+                <ul class="theme-list">
+                    <li>Gaming Tournament <span class="capacity-badge">15-30 people</span></li>
+                    <li>Beach Luau <span class="capacity-badge">20-50 people</span></li>
+                    <li>Hollywood Red Carpet <span class="capacity-badge">25-60 people</span></li>
+                    <li>Neon Glow Party <span class="capacity-badge">30-75 people</span></li>
+                    <li>Sports Celebration <span class="capacity-badge">20-40 people</span></li>
+                </ul>
+                <div class="capacity-info">
+                    <h4>Recommended Setup</h4>
+                    <p>Perfect for ages 13-25. Features modern music, interactive activities, and social spaces with DJ and party coordinators.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adult Celebrations -->
+        <div class="theme-category">
+            <div class="category-header">
+                <h3>Adult Celebrations</h3>
+                <p>Sophisticated party experiences</p>
+            </div>
+            <div class="category-content">
+                <ul class="theme-list">
+                    <li>Masquerade Ball <span class="capacity-badge">30-100 people</span></li>
+                    <li>Great Gatsby 1920s <span class="capacity-badge">25-80 people</span></li>
+                    <li>Tropical Paradise <span class="capacity-badge">40-120 people</span></li>
+                    <li>Wine & Cheese Tasting <span class="capacity-badge">15-40 people</span></li>
+                    <li>Casino Night <span class="capacity-badge">20-60 people</span></li>
+                </ul>
+                <div class="capacity-info">
+                    <h4>Recommended Setup</h4>
+                    <p>Elegant themes for adult gatherings. Includes premium decorations, sophisticated entertainment, and professional staff.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Corporate Events -->
+        <div class="theme-category">
+            <div class="category-header">
+                <h3>Corporate Events</h3>
+                <p>Professional team building</p>
+            </div>
+            <div class="category-content">
+                <ul class="theme-list">
+                    <li>Team Building Olympics <span class="capacity-badge">20-100 people</span></li>
+                    <li>Innovation Workshop <span class="capacity-badge">15-50 people</span></li>
+                    <li>Annual Gala Dinner <span class="capacity-badge">50-200 people</span></li>
+                    <li>Product Launch Party <span class="capacity-badge">30-150 people</span></li>
+                    <li>Holiday Office Party <span class="capacity-badge">25-120 people</span></li>
+                </ul>
+                <div class="capacity-info">
+                    <h4>Recommended Setup</h4>
+                    <p>Professional events with team-building activities, networking opportunities, and corporate branding integration.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seasonal & Holiday -->
+        <div class="theme-category">
+            <div class="category-header">
+                <h3>Seasonal & Holiday</h3>
+                <p>Celebrate special occasions</p>
+            </div>
+            <div class="category-content">
+                <ul class="theme-list">
+                    <li>Christmas Wonderland <span class="capacity-badge">20-80 people</span></li>
+                    <li>Halloween Spooktacular <span class="capacity-badge">25-90 people</span></li>
+                    <li>Summer Beach Bash <span class="capacity-badge">30-100 people</span></li>
+                    <li>Spring Garden Party <span class="capacity-badge">20-60 people</span></li>
+                    <li>New Year's Eve Countdown <span class="capacity-badge">40-150 people</span></li>
+                </ul>
+                <div class="capacity-info">
+                    <h4>Recommended Setup</h4>
+                    <p>Seasonal decorations, themed food and drinks, and holiday-appropriate entertainment for memorable celebrations.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Creative & Unique -->
+        <div class="theme-category">
+            <div class="category-header">
+                <h3>Creative & Unique</h3>
+                <p>One-of-a-kind experiences</p>
+            </div>
+            <div class="category-content">
+                <ul class="theme-list">
+                    <li>Murder Mystery Night <span class="capacity-badge">15-40 people</span></li>
+                    <li>Escape Room Adventure <span class="capacity-badge">10-30 people</span></li>
+                    <li>Art & Craft Party <span class="capacity-badge">12-25 people</span></li>
+                    <li>Science Lab Experience <span class="capacity-badge">10-20 people</span></li>
+                    <li>Outdoor Movie Night <span class="capacity-badge">20-80 people</span></li>
+                </ul>
+                <div class="capacity-info">
+                    <h4>Recommended Setup</h4>
+                    <p>Interactive and engaging experiences with specialized equipment, facilitators, and unique entertainment options.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- 1. Modal Booking Form -->
@@ -447,12 +741,54 @@
                 <label for="partyType">Party Theme</label>
                 <select id="partyType" name="partyType" required>
                     <option value="">Select a theme</option>
-                    <option value="Birthday">Birthday</option>
-                    <option value="Themed">Themed</option>
-                    <option value="Corporate">Corporate</option>
-                    <option value="Kids">Kids</option>
-                    <option value="Other">Other</option>
+                    <optgroup label="Children's Parties">
+                        <option value="Princess Party">Princess Party</option>
+                        <option value="Superhero Adventure">Superhero Adventure</option>
+                        <option value="Pirate Treasure Hunt">Pirate Treasure Hunt</option>
+                        <option value="Dinosaur Discovery">Dinosaur Discovery</option>
+                        <option value="Animal Safari">Animal Safari</option>
+                    </optgroup>
+                    <optgroup label="Teen & Young Adult">
+                        <option value="Gaming Tournament">Gaming Tournament</option>
+                        <option value="Beach Luau">Beach Luau</option>
+                        <option value="Hollywood Red Carpet">Hollywood Red Carpet</option>
+                        <option value="Neon Glow Party">Neon Glow Party</option>
+                        <option value="Sports Celebration">Sports Celebration</option>
+                    </optgroup>
+                    <optgroup label="Adult Celebrations">
+                        <option value="Masquerade Ball">Masquerade Ball</option>
+                        <option value="Great Gatsby 1920s">Great Gatsby 1920s</option>
+                        <option value="Tropical Paradise">Tropical Paradise</option>
+                        <option value="Wine & Cheese Tasting">Wine & Cheese Tasting</option>
+                        <option value="Casino Night">Casino Night</option>
+                    </optgroup>
+                    <optgroup label="Corporate Events">
+                        <option value="Team Building Olympics">Team Building Olympics</option>
+                        <option value="Innovation Workshop">Innovation Workshop</option>
+                        <option value="Annual Gala Dinner">Annual Gala Dinner</option>
+                        <option value="Product Launch Party">Product Launch Party</option>
+                        <option value="Holiday Office Party">Holiday Office Party</option>
+                    </optgroup>
+                    <optgroup label="Seasonal & Holiday">
+                        <option value="Christmas Wonderland">Christmas Wonderland</option>
+                        <option value="Halloween Spooktacular">Halloween Spooktacular</option>
+                        <option value="Summer Beach Bash">Summer Beach Bash</option>
+                        <option value="Spring Garden Party">Spring Garden Party</option>
+                        <option value="New Year's Eve Countdown">New Year's Eve Countdown</option>
+                    </optgroup>
+                    <optgroup label="Creative & Unique">
+                        <option value="Murder Mystery Night">Murder Mystery Night</option>
+                        <option value="Escape Room Adventure">Escape Room Adventure</option>
+                        <option value="Art & Craft Party">Art & Craft Party</option>
+                        <option value="Science Lab Experience">Science Lab Experience</option>
+                        <option value="Outdoor Movie Night">Outdoor Movie Night</option>
+                    </optgroup>
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label for="guests">Number of Guests</label>
+                <input type="number" id="guests" name="guests" min="1" max="200" required />
             </div>
 
             <div class="form-group">
@@ -497,12 +833,33 @@
             <label for="partyType2">Party Theme</label>
             <select id="partyType2" name="partyType" required>
                 <option value="">Select a theme</option>
-                <option value="Birthday">Birthday</option>
-                <option value="Themed">Themed</option>
-                <option value="Corporate">Corporate</option>
-                <option value="Kids">Kids</option>
-                <option value="Other">Other</option>
+                <optgroup label="Children's Parties">
+                    <option value="Princess Party">Princess Party</option>
+                    <option value="Superhero Adventure">Superhero Adventure</option>
+                    <option value="Pirate Treasure Hunt">Pirate Treasure Hunt</option>
+                    <option value="Dinosaur Discovery">Dinosaur Discovery</option>
+                    <option value="Animal Safari">Animal Safari</option>
+                </optgroup>
+                <optgroup label="Teen & Young Adult">
+                    <option value="Gaming Tournament">Gaming Tournament</option>
+                    <option value="Beach Luau">Beach Luau</option>
+                    <option value="Hollywood Red Carpet">Hollywood Red Carpet</option>
+                    <option value="Neon Glow Party">Neon Glow Party</option>
+                    <option value="Sports Celebration">Sports Celebration</option>
+                </optgroup>
+                <optgroup label="Adult Celebrations">
+                    <option value="Masquerade Ball">Masquerade Ball</option>
+                    <option value="Great Gatsby 1920s">Great Gatsby 1920s</option>
+                    <option value="Tropical Paradise">Tropical Paradise</option>
+                    <option value="Wine & Cheese Tasting">Wine & Cheese Tasting</option>
+                    <option value="Casino Night">Casino Night</option>
+                </optgroup>
             </select>
+        </div>
+
+        <div class="form-group">
+            <label for="guests2">Number of Guests</label>
+            <input type="number" id="guests2" name="guests" min="1" max="200" required />
         </div>
 
         <div class="form-group">
