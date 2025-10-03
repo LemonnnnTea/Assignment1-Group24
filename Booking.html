@@ -1,15 +1,392 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Karoomba! — Theme Party Specialists</title>
-    <meta name="description" content="Karoomba! — themed party planning, decorations, and full-event management." />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Karoomba! — Book Your Party</title>
+    <meta name="description" content="Book your themed party with Karoomba! Complete the form to get started." />
+
+    <!-- CSS Styles -->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/layout.css" />
+
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #FF6B6B;
+            --primary-dark: #FF5252;
+            --secondary: #4ECDC4;
+            --dark: #292F36;
+            --light: #F7FFF7;
+            --accent: #FFE66D;
+            --gray: #6C757D;
+            --gray-light: #F8F9FA;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+
+        h1, h2, h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        button {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Header Styles */
+        .wrap {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .muted {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Modal Styles */
+        #bookingModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: var(--dark);
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 2px rgba(78, 205, 196, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Bottom Booking Form */
+        #bottomBookingForm {
+            background-color: white;
+            padding: 3rem 2rem;
+            margin: 3rem auto;
+            border-radius: 12px;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        #bottomBookingForm h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        #bottomBookingForm h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /* Success Message */
+        #successMessage {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s;
+        }
+
+        .message-box {
+            background: #fff;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 80%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: slideUp 0.3s;
+        }
+
+        .message-box h2 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .message-box p {
+            margin-bottom: 2rem;
+            color: var(--gray);
+        }
+
+        #closeSuccess {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        #closeSuccess:hover {
+            background-color: #3db8af;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-<script src="js/script.js"></script>
 <div class="wrap" id="top">
     <header role="banner" aria-label="Karoomba header">
         <div class="brand">
@@ -32,4 +409,222 @@
         </div>
     </header>
 </div>
+
+<!-- Hero Section -->
+<section class="hero">
+    <h1>Book Your Perfect Party</h1>
+    <p>Let us create unforgettable memories with our themed parties and events. Fill out the form below to get started!</p>
+    <button class="primary" id="hero-booking">Book Your Party</button>
+</section>
+
+<!-- 1. Modal Booking Form -->
+<div id="bookingModal">
+    <div class="modal-content">
+        <button class="close-btn" id="closeModal" aria-label="Close">&times;</button>
+        <h2>Book Your Party</h2>
+        <form id="bookingForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required />
+            </div>
+
+            <div class="form-group">
+                <label for="date">Event Date</label>
+                <input type="date" id="date" name="date" required />
+            </div>
+
+            <div class="form-group">
+                <label for="partyType">Party Theme</label>
+                <select id="partyType" name="partyType" required>
+                    <option value="">Select a theme</option>
+                    <option value="Birthday">Birthday</option>
+                    <option value="Themed">Themed</option>
+                    <option value="Corporate">Corporate</option>
+                    <option value="Kids">Kids</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="details">Additional Details</label>
+                <textarea id="details" name="details" rows="4" placeholder="Tell us more about your event..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Booking</button>
+        </form>
+    </div>
+</div>
+
+<!-- 2. Page Bottom Booking Form -->
+<div id="bottomBookingForm">
+    <h2>Quick Booking</h2>
+    <form id="pageBookingForm">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="name2">Full Name</label>
+                <input type="text" id="name2" name="name" required />
+            </div>
+
+            <div class="form-group">
+                <label for="email2">Email</label>
+                <input type="email" id="email2" name="email" required />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="phone2">Phone Number</label>
+                <input type="tel" id="phone2" name="phone" required />
+            </div>
+
+            <div class="form-group">
+                <label for="date2">Event Date</label>
+                <input type="date" id="date2" name="date" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="partyType2">Party Theme</label>
+            <select id="partyType2" name="partyType" required>
+                <option value="">Select a theme</option>
+                <option value="Birthday">Birthday</option>
+                <option value="Themed">Themed</option>
+                <option value="Corporate">Corporate</option>
+                <option value="Kids">Kids</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="details2">Additional Details</label>
+            <textarea id="details2" name="details" rows="4" placeholder="Tell us more about your event..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Now</button>
+    </form>
+</div>
+
+<!-- 3. Success Message -->
+<div id="successMessage">
+    <div class="message-box">
+        <h2>Reservation Successful!</h2>
+        <p>Thank you for your booking. We will contact you soon to confirm the details.</p>
+        <button id="closeSuccess">Close</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="brand">
+            <div class="logo" aria-hidden="true">K</div>
+            <div>
+                <h2 style="margin:0; color:white">Karoomba!</h2>
+                <div class="muted">Theme Parties • Events • Fun</div>
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="Services.html">Services</a>
+            <a href="Gallery.html">Gallery</a>
+            <a href="Events.html">Events</a>
+            <a href="Contactus.html">Contact</a>
+            <a href="Booking.html">Booking</a>
+        </div>
+
+        <div class="copyright">
+            &copy; 2023 Karoomba! All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Set minimum date for date inputs
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const minDate = `${yyyy}-${mm}-${dd}`;
+        document.querySelectorAll('input[type="date"]').forEach(input => {
+            input.setAttribute('min', minDate);
+        });
+
+        // Modal functionality
+        const openBtn = document.getElementById('open-booking');
+        const heroBtn = document.getElementById('hero-booking');
+        const modal = document.getElementById('bookingModal');
+        const closeModalBtn = document.getElementById('closeModal');
+
+        function openModal() {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        openBtn.addEventListener('click', openModal);
+        heroBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Form submissions
+        const bookingForm = document.getElementById('bookingForm');
+        const pageForm = document.getElementById('pageBookingForm');
+
+        function showSuccessMessage() {
+            document.getElementById('successMessage').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeSuccessMessage() {
+            document.getElementById('successMessage').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showSuccessMessage();
+            bookingForm.reset();
+            closeModal();
+        });
+
+        pageForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showSuccessMessage();
+            pageForm.reset();
+        });
+
+        // Close success message
+        document.getElementById('closeSuccess').addEventListener('click', closeSuccessMessage);
+
+        // Close success message when clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target === document.getElementById('successMessage')) {
+                closeSuccessMessage();
+            }
+        });
+    });
+</script>
 </body>
+</html>
