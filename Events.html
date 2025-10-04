@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/layout.css" />
 </head>
 <body>
-<script src="js/script.js"></script>
 <div class="wrap" id="top">
     <header role="banner" aria-label="Karoomba header">
         <div class="brand">
@@ -20,49 +19,153 @@
             </div>
         </div>
         <nav role="navigation" aria-label="Main navigation">
-            <a href="index.html">Home</a>
-            <a href="Services.html">Services</a>
-            <a href="Gallery.html">Gallery</a>
-            <a href="Events.html">Events</a>
-            <a href="Contactus.html">Contact</a>
-            <a href="Booking.html">Booking</a>
+            <a href=" ">Home</a >
+            <a href="Services.html">Services</a >
+            <a href="Gallery.html">Gallery</a >
+            <a href="Events.html">Events</a >
+            <a href="Contactus.html">Contact</a >
+            <a href="Booking.html">Booking</a >
         </nav>
         <div class="center">
             <button class="primary" id="open-booking">Book Now</button>
         </div>
     </header>
-</div>
-</body>
 
+    <!-- ########## Events 主体内容（新增部分）########## -->
+    <main>
+        <!-- 1. 活动页面标题 & 简介 -->
+        <section class="events-intro" style="margin-top: 28px; text-align: center;">
+            <h2 style="margin: 0 0 12px 0; color: var(--dark); font-size: 1.8rem;">Upcoming & Featured Events</h2>
+            <p style="max-width: 700px; margin: 0 auto; color: var(--muted);">Join our curated theme parties, corporate events, and seasonal celebrations — all planned with Karoomba's signature fun and attention to detail!</p >
+        </section>
+
+        <!-- 2. 活动分类筛选栏（复用Gallery/Services的筛选逻辑） -->
+        <section class="events-filter" style="margin: 32px 0 20px; text-align: center;">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Events</button>
+                <button class="filter-btn" data-filter="theme">Theme Parties</button>
+                <button class="filter-btn" data-filter="corporate">Corporate Events</button>
+                <button class="filter-btn" data-filter="seasonal">Seasonal Celebrations</button>
+            </div>
+        </section>
+
+        <!-- 3. 活动卡片列表（复用Grid布局+Card样式，适配响应式） -->
+        <section class="events-grid grid" id="events-grid">
+            <!-- 活动1：主题派对（迪士尼） -->
+            <div class="card" data-type="theme" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                < img src="https://via.placeholder.com/400x200?text=Disney+Magical+Party" alt="Disney Magical Theme Party" style="border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px;">
+                <h3 style="font-size: 1.1rem; color: var(--dark);">Disney Magical Theme Party</h3>
+                <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
+                    <span>📅 Nov 20, 2025</span>
+                    <span>⏰ 2:00 PM - 8:00 PM</span>
+                </div>
+                <p style="margin: 0 0 14px; color: var(--muted); font-size: 0.9rem;">Immersive Disney characters, castle decor, and interactive games — perfect for kids & families!</p >
+                <div style="display: flex; gap: 8px;">
+                    <button class="primary" style="flex: 1;" onclick="document.getElementById('book-modal').setAttribute('open','')">Book This Event</button>
+                    <button class="secondary" style="flex: 1;">View Details</button>
+                </div>
+            </div>
+
+            <!-- 活动2：企业活动（周年庆典） -->
+            <div class="card" data-type="corporate" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                < img src="https://via.placeholder.com/400x200?text=Corporate+Anniversary" alt="Corporate Anniversary Gala" style="border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px;">
+                <h3 style="font-size: 1.1rem; color: var(--dark);">Corporate Anniversary Gala</h3>
+                <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
+                    <span>📅 Dec 05, 2025</span>
+                    <span>⏰ 6:00 PM - 11:00 PM</span>
+                </div>
+                <p style="margin: 0 0 14px; color: var(--muted); font-size: 0.9rem;">Elegant decor, catering, and live music for your company's milestone — stress-free planning included.</p >
+                <div style="display: flex; gap: 8px;">
+                    <button class="primary" style="flex: 1;" onclick="document.getElementById('book-modal').setAttribute('open','')">Book This Event</button>
+                    <button class="secondary" style="flex: 1;">View Details</button>
+                </div>
+            </div>
+
+            <!-- 活动3：季节性活动（圣诞派对） -->
+            <div class="card" data-type="seasonal" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                < img src="https://via.placeholder.com/400x200?text=Christmas+Wonderland" alt="Christmas Wonderland Party" style="border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px;">
+                <h3 style="font-size: 1.1rem; color: var(--dark);">Christmas Wonderland Party</h3>
+                <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
+                    <span>📅 Dec 22, 2025</span>
+                    <span>⏰ 3:00 PM - 9:00 PM</span>
+                </div>
+                <p style="margin: 0 0 14px; color: var(--muted); font-size: 0.9rem;">Snowy decor, Santa visit, and holiday treats — a festive celebration for groups of all sizes.</p >
+                <div style="display: flex; gap: 8px;">
+                    <button class="primary" style="flex: 1;" onclick="document.getElementById('book-modal').setAttribute('open','')">Book This Event</button>
+                    <button class="secondary" style="flex: 1;">View Details</button>
+                </div>
+            </div>
+
+            <!-- 活动4：主题派对（复古80年代） -->
+            <div class="card" data-type="theme" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                < img src="https://via.placeholder.com/400x200?text=80s+Retro+Party" alt="80s Retro Theme Party" style="border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px;">
+                <h3 style="font-size: 1.1rem; color: var(--dark);">80s Retro Theme Party</h3>
+                <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
+                    <span>📅 Jan 18, 2026</span>
+                    <span>⏰ 7:00 PM - 12:00 AM</span>
+                </div>
+                <p style="margin: 0 0 14px; color: var(--muted); font-size: 0.9rem;">Neon lights, classic 80s music, and retro costumes — dance the night away with nostalgic fun!</p >
+                <div style="display: flex; gap: 8px;">
+                    <button class="primary" style="flex: 1;" onclick="document.getElementById('book-modal').setAttribute('open','')">Book This Event</button>
+                    <button class="secondary" style="flex: 1;">View Details</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 活动预约CTA（复用Gallery的CTA卡片风格） -->
+        <section class="events-cta gallery-cta" style="margin-top: 40px;">
+            <div class="cta-card">
+                <h3>Have a Custom Event in Mind?</h3>
+                <p>We don’t just host events — we create personalized experiences. Tell us your vision, and we’ll bring it to life!</p >
+                <a href="Booking.html"><button class="primary">Plan My Custom Event</button></a >
+            </div>
+        </section>
+    </main>
+    <!-- ########## Events 主体内容结束 ########## -->
+
+</div>
+
+<!-- 预约弹窗（复用你原有的弹窗，仅调整适配） -->
 <footer>
-  <div class="footer-content"><!-- 按钮：点击触发弹窗 -->
-<button class="book-btn" id="open-book-modal">Book This Event</button>
+  <div class="footer-content">
+    <!-- 按钮：点击触发弹窗（保留你的原有按钮，新增卡片内按钮触发逻辑） -->
+    <button class="book-btn" id="open-book-modal" style="margin-bottom: 16px;" onclick="document.getElementById('book-modal').setAttribute('open','')">Book This Event</button>
 
-<!-- 弹窗容器：默认隐藏，点击按钮后显示 -->
-<div class="modal" id="book-modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h3>Book Your Event</h3>
-    <form id="book-form">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-      
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-      
-      <label for="phone">Phone:</label>
-      <input type="tel" id="phone" name="phone">
-      
-      <label for="event-date">Event Date:</label>
-      <input type="date" id="event-date" name="event-date" required>
-      
-      <label for="message">Message (Optional):</label>
-      <textarea id="message" name="message" rows="3"></textarea>
-      
-      <button type="submit" class="primary">Submit Booking</button>
-    </form>
-  </div>
-</div>
+    <!-- 弹窗容器：修改为与现有Modal样式统一（用layout.css的.modal/.panel样式） -->
+    <div class="modal" id="book-modal">
+      <div class="panel modal-content">
+        <span class="close" style="position: absolute; top: 18px; right: 18px; font-size: 1.5rem; cursor: pointer;" onclick="document.getElementById('book-modal').removeAttribute('open')">&times;</span>
+        <h3>Book Your Event</h3>
+        <form id="book-form" style="margin-top: 16px; display: grid; gap: 14px;">
+          <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+          <div>
+            <label for="event-type">Event Type (e.g., Disney Party):</label>
+            <input type="text" id="event-type" name="event-type" required>
+          </div>
+          <div>
+            <label for="event-date">Event Date:</label>
+            <input type="date" id="event-date" name="event-date" required>
+          </div>
+          <div>
+            <label for="message">Message (Optional):</label>
+            <textarea id="message" name="message" rows="3"></textarea>
+          </div>
+          <button type="submit" class="primary">Submit Booking</button>
+        </form>
+      </div>
+    </div>
+
     <div>
       <h3>Karoomba!</h3>
       <p>Theme Party Customization Specialists | Full-Service Planning, Stress-Free & Fun</p >
@@ -73,8 +176,70 @@
       <p>Business Hours: 9:00 AM - 9:00 PM (Open 7 Days a Week)</p >
     </div>
     <div>
-      <a href=" ">Contact Us</a >
-      <a href="#top">Back to Top</a > <!-- Convenient for users to return to the top of long pages -->
+      <a href="Contactus.html">Contact Us</a >
+      <a href="#top">Back to Top</a >
     </div>
   </div>
 </footer>
+
+<script src="js/script.js"></script>
+<!-- 新增：活动筛选交互（复用Services的筛选逻辑，保持JS风格统一） -->
+<script>
+// Events filter (same logic as Services filter in script.js)
+document.querySelectorAll('[data-filter]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        // 切换筛选按钮的"active"状态（视觉反馈）
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // 筛选活动卡片
+        const filterType = btn.dataset.filter;
+        document.querySelectorAll('#events-grid .card').forEach(card=>{
+            if(filterType === 'all' || card.dataset.type === filterType) {
+                card.style.display = 'block';
+                card.style.animation = 'fadeIn 0.6s ease'; // 复用Gallery的渐入动画
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+
+// 弹窗关闭逻辑（适配ESC键，与现有modal逻辑统一）
+document.addEventListener('keydown', e=>{
+    if(e.key === 'Escape') {
+        document.getElementById('book-modal').removeAttribute('open');
+    }
+});
+
+// 活动卡片hover效果（增强交互，与Gallery item风格统一）
+document.querySelectorAll('#events-grid .card').forEach(card=>{
+    card.addEventListener('mouseenter', ()=>{
+        card.style.transform = 'translateY(-5px)';
+        card.style.boxShadow = '0 12px 24px rgba(10, 12, 16, 0.15)';
+    });
+    card.addEventListener('mouseleave', ()=>{
+        card.style.transform = 'translateY(0)';
+        card.style.boxShadow = var(--shadow);
+    });
+});
+
+// 活动预约表单提交（复用现有表单成功弹窗逻辑）
+document.getElementById('book-form').addEventListener('submit', e=>{
+    e.preventDefault();
+    const form = e.target;
+    if(!form.checkValidity()){
+        form.reportValidity();
+        return;
+    }
+    // 关闭预约弹窗，显示成功弹窗（需确保script.js中有successModal元素）
+    document.getElementById('book-modal').removeAttribute('open');
+    if(document.getElementById('success')) {
+        document.getElementById('success').setAttribute('open','');
+    } else {
+        alert('Booking request submitted! We’ll contact you soon.'); // 备用提示
+    }
+});
+</script>
+</body>
+</html>
