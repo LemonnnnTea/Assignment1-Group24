@@ -29,10 +29,7 @@ function initGallery() {
     const closeLight = document.getElementById('close-light');
     const lightboxTitle = document.getElementById('lightbox-title');
     const lightboxDescription = document.getElementById('lightbox-description');
-    const lightboxCurrent = document.getElementById('lightbox-current');
-    const lightboxTotal = document.getElementById('lightbox-total');
     
-    let currentImageIndex = 0;
     let images = [];
     
     // Collect all image information for lightbox
@@ -57,8 +54,8 @@ function initGallery() {
 
     // Function to open lightbox with selected image
     function openLightbox(index) {
-        currentImageIndex = index;
-        updateLightbox();
+        const image = images[index];
+        updateLightbox(image);
         lightbox.style.display = 'flex';
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
     }
@@ -69,13 +66,10 @@ function initGallery() {
         document.body.style.overflow = 'auto'; // Restore scrolling
     }
 
-    // Update lightbox content with current image
-    function updateLightbox() {
-        const image = images[currentImageIndex];
+    // Update lightbox content with selected image
+    function updateLightbox(image) {
         lightboxTitle.textContent = image.title;
         lightboxDescription.textContent = image.description;
-        lightboxCurrent.textContent = currentImageIndex + 1;
-        lightboxTotal.textContent = images.length;
         
         // Display the actual image in lightbox
         const lightContent = document.getElementById('light-content');
@@ -98,21 +92,6 @@ function initGallery() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             closeLightbox();
-        }
-    });
-
-    // Navigation between images using arrow keys
-    document.addEventListener('keydown', function(e) {
-        if (lightbox.style.display === 'flex') {
-            if (e.key === 'ArrowLeft') {
-                // Previous image
-                currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : images.length - 1;
-                updateLightbox();
-            } else if (e.key === 'ArrowRight') {
-                // Next image
-                currentImageIndex = currentImageIndex < images.length - 1 ? currentImageIndex + 1 : 0;
-                updateLightbox();
-            }
         }
     });
 
