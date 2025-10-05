@@ -1,0 +1,36 @@
+nav a:hover{
+    background:rgba(78,205,196,0.08)
+}
+p{
+    color:var(--muted)
+}
+.filter-bar{
+    display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0
+}
+.filter-bar button{
+    padding:8px 14px;border:none;border-radius:20px;background:white;box-shadow:var(--shadow);cursor:pointer;font-weight:600
+}
+.filter-bar button.active{
+    background:var(--brand-2);color:white
+}
+.grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px
+}
+.card{
+    background:white;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;display:flex;flex-direction:column;
+}
+.card img{
+    width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:10px
+}
+.card h3{
+    margin:0;color:var(--brand-1)
+}
+.card p{
+    flex:1
+}
+footer{
+    text-align:center;margin-top:40px;padding:20px;background:white;box-shadow:var(--shadow);
+}
+@media(max-width:600px){
+    header{flex-direction:column;gap:10px}
+}

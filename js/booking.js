@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
+
+    document.addEventListener('DOMContentLoaded', () => {
     // Set minimum date for date inputs
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -9,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     input.setAttribute('min', minDate);
 });
 
-
+    // Modal functionality
     const openBtn = document.getElementById('open-booking');
     const heroBtn = document.getElementById('hero-booking');
     const modal = document.getElementById('bookingModal');
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 });
 
+    // Form submissions
     const bookingForm = document.getElementById('bookingForm');
     const pageForm = document.getElementById('pageBookingForm');
 
@@ -61,9 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
     pageForm.reset();
 });
 
-
+    // Close success message
     document.getElementById('closeSuccess').addEventListener('click', closeSuccessMessage);
-    
+
+    // Close success message when clicking outside
     window.addEventListener('click', (event) => {
     if (event.target === document.getElementById('successMessage')) {
     closeSuccessMessage();

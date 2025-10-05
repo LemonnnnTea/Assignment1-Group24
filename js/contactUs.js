@@ -1,48 +1,84 @@
+document.addEventListener('DOMContentLoaded', () => {
 
-    document.addEventListener('DOMContentLoaded', () => {
-    // Contact form submission
+    // ------------- Contact Form ----------------
     const contactForm = document.getElementById('contactForm');
+    const contactSuccess = document.getElementById('successMessage');
 
-    contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    showSuccessMessage();
-    contactForm.reset();
-});
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showSuccess(contactSuccess);
+            contactForm.reset();
+        });
+    }
 
-    // Success message functionality
-    function showSuccessMessage() {
-    document.getElementById('successMessage').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
+    // ------------- Booking Modal ----------------
+    const bookingModal = document.getElementById('bookingModal');
+    const bookingForm = document.getElementById('bookingForm');
+    const bookingSuccess = document.getElementById('successMessage');
+    const openBookingBtn = document.getElementById('open-booking');
+    const closeBookingBtn = bookingModal?.querySelector('#closeModal');
 
-    function closeSuccessMessage() {
-    document.getElementById('successMessage').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
+    // 打开弹窗
+    openBookingBtn?.addEventListener('click', () => {
+        bookingModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    });
 
-    // Close success message
-    document.getElementById('closeSuccess').addEventListener('click', closeSuccessMessage);
+    // 关闭弹窗
+    closeBookingBtn?.addEventListener('click', () => hideModal(bookingModal));
+    window.addEventListener('click', (e) => {
+        if (e.target === bookingModal) hideModal(bookingModal);
+    });
 
-    // Close success message when clicking outside
-    window.addEventListener('click', (event) => {
-    if (event.target === document.getElementById('successMessage')) {
-    closeSuccessMessage();
-}
-});
+    // 表单提交
+    bookingForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        hideModal(bookingModal);
+        showSuccess(bookingSuccess);
+        bookingForm.reset();
+    });
 
-    // Booking button functionality
-    const openBtn = document.getElementById('open-booking');
-    openBtn.addEventListener('click', () => {
-    window.location.href = 'Booking.html';
-});
+    // 成功提示关闭
+    const closeSuccessBtn = bookingSuccess?.querySelector('#closeSuccess');
+    closeSuccessBtn?.addEventListener('click', () => hideModal(bookingSuccess));
+    window.addEventListener('click', (e) => {
+        if (e.target === bookingSuccess) hideModal(bookingSuccess);
+    });
 
-    // load Google Maps
+    // ------------- Guest Number ----------------
+    const decreaseBtn = document.querySelector('.decrease');
+    const increaseBtn = document.querySelector('.increase');
+    const guestsInput = document.getElementById('guests');
+
+    decreaseBtn?.addEventListener('click', () => {
+        if (!guestsInput) return;
+        let value = parseInt(guestsInput.value) || 1;
+        if (value > 1) guestsInput.value = value - 1;
+    });
+
+    increaseBtn?.addEventListener('click', () => {
+        if (!guestsInput) return;
+        let value = parseInt(guestsInput.value) || 1;
+        guestsInput.value = value + 1;
+    });
+
+    // ------------- Helper Functions -------------
+    function hideModal(el) {
+        el.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function showSuccess(el) {
+        el.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    // ------------- Google Maps ----------------
     function loadGoogleMaps() {
-    // you can use more accurate location
-    // Here is an example
-    console.log('Google Maps loaded for 天津市大港油田海滨街道庆祥北里');
-}
-
-    // initialize map after loading pages
+        console.log('Google Maps loaded for 天津市大港油田海滨街道庆祥北里');
+    }
     loadGoogleMaps();
 });
+
+

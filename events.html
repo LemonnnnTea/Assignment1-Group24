@@ -7,8 +7,8 @@
     <meta name="description" content="Karoomba! is your go-to partner for themed party planning, decorations, and full event management." />
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/event.css" />
-    <script src="js/events.js"></script>
 </head>
+
 <body>
 <div class="wrap">
     <header role="banner" aria-label="Karoomba header">
@@ -24,10 +24,13 @@
             <a href="services.html">Services</a>
             <a href="gallery.html">Gallery</a>
             <a href="events.html">Events</a>
-            <a href="aboutUs.html">About Us</a>
-            <a href="contactUs.html">Contact</a>
             <a href="booking.html">Booking</a>
+            <a href="contactUs.html">Contact</a>
+            <a href="aboutUs.html">About Us</a>
         </nav>
+        <div class="center">
+            <button class="primary" id="open-booking">Book Now</button>
+        </div>
     </header>
 
     <!-- ########## Events 主体内容（对齐 Booking 页调整）########## -->
@@ -241,7 +244,6 @@
     </div>
 </div>
 
-<!-- 2. Success Modal (matches Booking page style) -->
 <div id="successMessage">
     <div class="message-box">
         <h2>Reservation Successful!</h2>
@@ -250,7 +252,12 @@
     </div>
 </div>
 
-<!-- Footer (consistent with Booking page) -->
+
+
+
+<script src="js/events.js"></script>
+</body>
+
 <footer style="background-color: var(--dark); color: white; padding: 3rem 2rem; text-align: center; margin-top: 3rem;">
     <div class="footer-content" style="max-width: 1200px; margin: 0 auto;">
         <div class="brand" style="display: flex; align-items: center; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
@@ -275,8 +282,4 @@
         </div>
     </div>
 </footer>
-
-<!-- JavaScript (functional consistency with Booking page) -->
-
-</body>
 </html>
