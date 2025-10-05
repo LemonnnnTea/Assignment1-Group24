@@ -1,0 +1,77 @@
+:root {
+    --primary: #FF6B6B;
+    --primary-dark: #FF5252;
+    --secondary: #4ECDC4;
+    --dark: #292F36;
+    --light: #F7FFF7;
+    --accent: #FFE66D;
+    --gray: #6C757D;
+    --gray-light: #F8F9FA;
+}
+/* 同步 Booking 页按钮交互 */
+button.primary:hover {
+    background-color: var(--primary-dark);
+}
+button.secondary {
+    border: 1px solid var(--secondary);
+    color: var(--secondary);
+    background: transparent;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+button.secondary:hover {
+    background: var(--secondary);
+    color: white;
+}
+/* 同步 Booking 页成功弹窗（和 Booking 完全一致） */
+#successMessage {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.message-box {
+    background: #fff;
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 80%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: slideUp 0.3s;
+}
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.message-box h2 { color: var(--dark); margin-bottom: 1rem; font-size: 1.5rem; }
+.message-box p { margin-bottom: 2rem; color: var(--gray); font-size: 1rem; }
+#closeSuccess {
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+#closeSuccess:hover { background-color: #3db8af; }
+/* 同步 Booking 页人数标签 */
+.capacity-badge {
+    background-color: var(--accent);
+    color: var(--dark);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 4px;
+}

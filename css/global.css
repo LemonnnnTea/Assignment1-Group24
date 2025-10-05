@@ -1,0 +1,358 @@
+:root{
+    --brand-1:#FF6B6B;
+    --brand-2:#4ECDC4;
+    --dark:#0f1720;
+    --muted:#6b7280;
+    --bg:#fbfdff;
+    --max-width:1100px;
+    --radius:12px;
+    --gap:1rem;
+    --shadow: 0 6px 18px rgba(10,12,16,0.08);
+    --focus: 3px solid rgba(78,205,196,0.18);
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Reset-ish */
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    height:100%;
+    margin:0;
+    background:linear-gradient(180deg,var(--bg),#f7fbff);
+    color:var(--dark);
+}
+
+.logo{
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    color:white;
+    font-weight:700;
+}
+button.primary{
+    background:var(--brand-1);
+    color:white;
+    padding:10px 16px;
+    border-radius:8px;
+    border:none;
+    font-weight:700;
+    cursor:pointer;
+}
+button.secondary{
+    background:transparent;
+    border:1px solid var(--brand-2);
+    color:var(--brand-2);
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+}
+.card{
+    background:white;
+    border-radius:12px;
+    padding:14px;
+    box-shadow:var(--shadow);
+}
+.card h3{
+    margin:0 0 6px 0;
+}
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+.muted{
+    color:var(--muted);
+    font-size:0.95rem;
+}
+.thumb{
+    border-radius:8px;
+    overflow:hidden;
+    background:linear-gradient(135deg,#eee,#ddd);
+    display:grid;
+    place-items:center;
+}
+
+/* 表单基础样式 */
+label{
+    display:block;
+    font-weight:600;
+    margin-bottom:6px;
+}
+input[type=text],input[type=email],input[type=date],select,textarea{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #e6e9ee;
+    background:white;
+}
+textarea{
+    min-height:100px;
+}
+
+/* Footer 基础布局 */
+footer{
+    margin-top:28px;
+    padding:18px;
+    border-radius:12px;
+    background:#ffffff;
+    box-shadow:var(--shadow);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* Accessibility focus */
+a:focus,button:focus,input:focus,select:focus,textarea:focus{
+    outline:none;
+    box-shadow:var(--focus);
+    border-radius:8px;
+}
+
+/* Modal 基础样式 */
+.modal .panel{
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    max-width:720px;
+    width:92%;
+}
+
+/* 小工具类 */
+.center{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.pill{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:rgba(0,0,0,0.04);
+    font-weight:700;
+}
+
+/* breadcrumbs */
+.breadcrumbs{
+    font-size:0.9rem;
+    color:var(--muted);
+    margin-bottom:6px;
+}
+
+/* Testimonials */
+.testi .t{
+    min-width:220px;
+}
+
+/* Wrapper */
+.wrap{
+    max-width:var(--max-width);
+    margin:28px auto;
+    padding:20px;
+    width:90%;
+}
+
+/* Header - 全站通用 */
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+}
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.logo{
+    width:56px;
+    height:56px;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--brand-1),var(--brand-2));
+    display:grid;
+    place-items:center;
+    color:white;
+    font-weight:700;
+}
+nav{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+nav a{
+    padding:8px 12px;
+    border-radius:8px;
+    text-decoration:none;
+    color:var(--dark);
+    font-weight:600;
+}
+nav a:focus, nav a:hover{
+    outline:none;
+    background:rgba(78,205,196,0.06);
+}
+
+/* Footer - 全站通用 */
+footer{
+    margin-top:28px;
+    padding:18px;
+    border-radius:12px;
+    background:#ffffff;
+    box-shadow:var(--shadow);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* Grid layouts - 可全局复用 */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:16px;
+    margin-top:20px;
+}
+.row{
+    display:flex;
+    gap:12px;
+}
+.row > *{
+    flex:1;
+}
+
+/* Gallery grid - 可全局复用 */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 三列 */
+    gap: 10px;
+}
+
+.thumb img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Testimonials - 可全局复用 */
+.testi{
+    display:flex;
+    gap:12px;
+    overflow:auto;
+}
+.testi .t{
+    min-width:220px;
+}
+
+/* Modal - 可全局复用 */
+.modal{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(2,6,23,0.5);
+    z-index:1000;
+}
+.modal[open]{
+    display:flex;
+}
+.modal .panel{
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    max-width:720px;
+    width:92%;
+}
+
+/* Responsive 公用布局 */
+@media (max-width:900px){
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:600px){
+    nav{display:none;}
+    .gallery-grid{grid-template-columns:1fr;}
+}
+
+header {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 16px 24px;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 42px;
+    height: 42px;
+    font-size: 1.2rem;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 18px;
+}
+
+nav a {
+    padding: 8px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+}
+
+nav a:hover,
+nav a:focus {
+    outline: none;
+    background: rgba(78,205,196,0.08);
+}
+
+/* 响应式调整 */
+@media (max-width: 1080px) {
+    header {
+        padding: 12px 16px;
+    }
+    nav {
+        gap: 12px;
+    }
+    nav a {
+        font-size: 0.9rem;
+        padding: 6px 8px;
+    }
+    .brand h1 {
+        font-size: 1rem;
+    }
+    .logo {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 720px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    nav {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-start;
+    }
+}

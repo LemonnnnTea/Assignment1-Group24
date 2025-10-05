@@ -1,0 +1,36 @@
+
+.hero{
+    margin-top:18px;
+    background:white;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:28px;
+    display:grid;
+    grid-template-columns:1fr 360px;
+    gap:20px;
+}
+.hero .intro h2{
+    margin:0 0 8px 0;
+    font-size:1.6rem;
+}
+.hero p{
+    margin:0;
+    color:var(--muted);
+}
+.cta{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+/* Hero 响应式调整 */
+@media (max-width:900px){
+    .hero{grid-template-columns:1fr;}
+}
+@media (max-width:600px){
+    .hero .intro h2{font-size:1.2rem;}
+}
+
+
+/* Header + Navigation 调整 - 首页特有间距和响应式 */
+

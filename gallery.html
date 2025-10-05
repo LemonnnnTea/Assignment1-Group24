@@ -2,38 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Karoomba! — Theme Party Gallery</title>
-    <meta name="description" content="Browse our amazing themed party gallery - birthday parties, corporate events, weddings and more!" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/layout.css" />
-    <link rel="stylesheet" href="css/gallery_style.css" />  
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Karoomba! — Themed Party Specialists</title>
+    <meta name="description" content="Karoomba! is your go-to partner for themed party planning, decorations, and full event management." />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/gallery.css" />
     <script src="js/gallery.js"></script>
-    <style>
-        /* Animation for gallery items */
-        .gallery-item {
-            animation: fadeIn 0.6s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
-        }
-    </style>
 </head>
-
 <body>
-<script src="js/script.js"></script>
-<div class="wrap" id="top">
+<div class="wrap">
     <header role="banner" aria-label="Karoomba header">
         <div class="brand">
-            <div class="logo" aria-hidden="true">K</div>
+            <div class="logo">K</div>
             <div>
                 <h1 style="margin:0">Karoomba!</h1>
                 <div class="muted">Theme Parties • Events • Fun</div>
@@ -41,21 +21,14 @@
         </div>
         <nav role="navigation" aria-label="Main navigation">
             <a href="index.html">Home</a>
-            <a href="Services.html">Services</a>
-            <a href="Gallery.html" aria-current="page">Gallery</a>
-            <a href="Events.html">Events</a>
-            <a href="Contactus.html">Contact</a>
-            <a href="Booking.html">Booking</a>
+            <a href="services.html">Services</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="events.html">Events</a>
+            <a href="aboutUs.html">About Us</a>
+            <a href="contactUs.html">Contact</a>
+            <a href="booking.html">Booking</a>
         </nav>
-        <div class="center">
-            <button class="primary" id="open-booking">Book Now</button>
-        </div>
     </header>
-
-    <!-- Breadcrumbs navigation -->
-    <div class="breadcrumbs">
-        <a href="index.html">Home</a> / Gallery
-    </div>
 
     <!-- Gallery Main Content -->
     <main>
@@ -239,7 +212,7 @@
             <div class="cta-card">
                 <h3>Ready to Create Your Perfect Party?</h3>
                 <p>Let us bring your vision to life with our expert event planning services.</p>
-                <a href="Booking.html"><button class="primary">Book Your Event Now</button></a>
+                <a href="booking.html"><button class="primary">Book Your Event Now</button></a>
             </div>
         </section>
     </main>
@@ -249,11 +222,11 @@
         <p>&copy; 2025 Karoomba! All rights reserved.</p>
         <nav>
             <a href="index.html">Home</a>
-            <a href="Services.html">Services</a>
-            <a href="Gallery.html">Gallery</a>
-            <a href="Events.html">Events</a>
-            <a href="Contactus.html">Contact</a>
-            <a href="Booking.html">Booking</a>
+            <a href="services.html">Services</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="events.html">Events</a>
+            <a href="contactUs.html">Contact</a>
+            <a href="booking.html">Booking</a>
         </nav>
     </footer>
 </div>
@@ -271,13 +244,5 @@
         </div>
     </div>
 </div>
-
-<script>
-// Initialize gallery functionality when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    initGallery();
-});
-</script>
-
 </body>
 </html>

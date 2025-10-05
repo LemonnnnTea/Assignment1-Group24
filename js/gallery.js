@@ -97,3 +97,7 @@ function initGallery() {
 
     console.log('Gallery functionality initialized successfully');
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    initGallery();
+});

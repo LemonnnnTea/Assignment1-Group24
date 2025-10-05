@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Karoomba! — Contact Us</title>
+    <meta name="description" content="Get in touch with Karoomba! Contact us for themed party planning and event management." />
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/contactUs.css" />
+    <script src="js/contactUs.js"></script>
+
+
+</head>
+<body>
+<div class="wrap">
+    <header role="banner" aria-label="Karoomba header">
+        <div class="brand">
+            <div class="logo">K</div>
+            <div>
+                <h1 style="margin:0">Karoomba!</h1>
+                <div class="muted">Theme Parties • Events • Fun</div>
+            </div>
+        </div>
+        <nav role="navigation" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="events.html">Events</a>
+            <a href="aboutUs.html">About Us</a>
+            <a href="contactUs.html">Contact</a>
+            <a href="booking.html">Booking</a>
+        </nav>
+    </header>
+</div>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Get In Touch With Karoomba!</h1>
+        <p>We're here to help you create unforgettable party experiences. Reach out to us with any questions or to start planning your next event!</p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="contact-container">
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+
+            <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div class="info-content">
+                    <h3>Our Location</h3>
+                    <p>天津市大港油田海滨街道庆祥北里<br>Dagang Oilfield, Binhai Street, Qingxiang Beili<br>Tianjin, China</p>
+                    <!-- here is an example,you can use other location -->
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">📞</div>
+                <div class="info-content">
+                    <h3>Phone Numbers</h3>
+                    <p>Main: (022) 1234-5678<br>Events: (022) 1234-5679<br>Emergency: (022) 1234-5680</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">✉️</div>
+                <div class="info-content">
+                    <h3>Email Addresses</h3>
+                    <p>General: info@karoomba.com<br>Events: events@karoomba.com<br>Support: support@karoomba.com</p>
+                </div>
+            </div>
+
+            <div class="business-hours">
+                <h3>Business Hours</h3>
+                <ul class="hours-list">
+                    <li><span>Monday - Friday</span><span>9:00 AM - 6:00 PM</span></li>
+                    <li><span>Saturday</span><span>10:00 AM - 4:00 PM</span></li>
+                    <li><span>Sunday</span><span>Closed</span></li>
+                    <li><span>Emergency Events</span><span>24/7 Available</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" />
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Select a subject</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="booking">Event Booking</option>
+                        <option value="quote">Price Quote</option>
+                        <option value="partnership">Partnership</option>
+                        <option value="complaint">Complaint</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Tell us how we can help you..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-section">
+        <h2>Find Our Location</h2>
+        <div class="map-container">
+            <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3082.3456789012345!2d117.45678901234567!3d38.87654321098765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDUyJzM1LjYiTiAxMTfCsDI3JzM0LjUiRQ!5e0!3m2!1sen!2scn!4v1234567890123!5m2!1sen!2scn"
+                    class="map-frame"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <div class="map-info">
+                <h3>Karoomba! Headquarters</h3>
+                <p>📍 天津市大港油田海滨街道庆祥北里</p><!-- here is an example location,you can use another location -->
+                <p>📞 (022) 1234-5678</p>
+                <p>🕒 Mon-Fri: 9:00 AM - 6:00 PM</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h3>How far in advance should I book my event?</h3>
+                <p>We recommend booking at least 4-6 weeks in advance for smaller events and 8-12 weeks for larger events to ensure availability and proper planning.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What areas do you serve?</h3>
+                <p>We serve the entire Tianjin area and can travel up to 50km from our location. Additional travel fees may apply for destinations beyond 25km.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I customize my party theme?</h3>
+                <p>Absolutely! We specialize in custom themes. Our team will work with you to create a unique experience that matches your vision perfectly.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What is your cancellation policy?</h3>
+                <p>Cancellations made 30+ days before the event receive a full refund. 15-29 days: 50% refund. Less than 15 days: no refund but we can reschedule.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Success Message -->
+<div id="successMessage">
+    <div class="message-box">
+        <h2>Message Sent Successfully!</h2>
+        <p>Thank you for contacting us. We'll get back to you within 24 hours.</p>
+        <button id="closeSuccess">Close</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="brand">
+            <div class="logo" aria-hidden="true">K</div>
+            <div>
+                <h2 style="margin:0; color:white">Karoomba!</h2>
+                <div class="muted">Theme Parties • Events • Fun</div>
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="events.html">Events</a>
+            <a href="contactUs.html">Contact</a>
+            <a href="booking.html">Booking</a>
+        </div>
+
+        <div class="copyright">
+            &copy; 2025 Karoomba! All rights reserved. | 天津市大港油田海滨街道庆祥北里<!-- here is an example location,you can use another location -->
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+
+</body>
+</html>
