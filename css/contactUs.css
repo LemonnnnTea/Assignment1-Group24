@@ -1,4 +1,4 @@
- /* Global Styles */
+
  :root {
      --primary: #FF6B6B;
      --primary-dark: #FF5252;
@@ -40,7 +40,7 @@ button {
     background-color: var(--primary-dark);
 }
 
-/* Hero Section */
+
 .hero {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: white;
@@ -75,7 +75,7 @@ button {
     opacity: 0.95;
 }
 
-/* Contact Section */
+
 .contact-section {
     padding: 4rem 2rem;
     max-width: 1200px;
@@ -363,7 +363,7 @@ textarea {
     line-height: 1.6;
 }
 
-/* Success Message */
+
 #successMessage {
     display: none;
     position: fixed;
@@ -412,7 +412,7 @@ textarea {
     background-color: #3db8af;
 }
 
-/* Animations */
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -423,7 +423,7 @@ textarea {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* Responsive Design */
+
 @media (max-width: 968px) {
     .contact-container {
         grid-template-columns: 1fr;

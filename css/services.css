@@ -113,13 +113,13 @@ p{
     color:var(--brand-2);
 }
 
-/* small meta line */
+
 .meta{
     font-size:0.85rem;
     color:var(--muted);
 }
 
-/* responsive */
+
 @media (max-width:860px){
     .service-item img{ width:140px; height:100px; }
     .pricing p{ min-width:140px; }
