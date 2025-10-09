@@ -34,100 +34,331 @@
     </header>
 </div>
 <main class="wrap">
-    <h1>Our Services</h1>
+    <div style="text-align: center;"><h1>Our Services</h1></div>
     <p style="text-align:center;max-width:720px;margin:0 auto">Karoomba! offers a variety of themed event planning services — from intimate birthdays to large corporate parties. Explore our packages and find the perfect match for your celebration.</p>
 
-    <section class="grid" id="services-grid">
-        <div class="card" data-type="birthday">
-            <img src="imgs/pictures/Services/birthday.jpg" alt="birthday">
-            <h3>🎂 Birthday Party</h3>
-            <p>Celebrate birthdays with themed decorations, custom cakes, and fun activities for all ages.</p>
+    <section class="service-list" aria-label="Services list">
+
+        <!-- 1 Birthday Party -->
+        <div class="service-item" data-type="birthday">
+            <img src="imgs/pictures/Services/birthday.jpg" alt="Birthday Party">
+            <div class="service-info">
+                <h3>🎂 Birthday Party</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Themed decorations (table, backdrop, signage)
+                    <br>• Custom cake & dessert setup
+                    <br>• Host/MC and 2–3 party games
+                    <br>• Basic sound & mood lighting
+                    <br>• Setup & teardown (2–3 hours)
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$299</span> — Decor + Cake + Music</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$499</span> — + Host + Games + Photo booth</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$899</span> — + Full planning + Photographer</p>
+                </div>
+                <div class="meta">Guest range: up to 50 · Travel fees may apply</div>
+            </div>
         </div>
 
-        <div class="card" data-type="copEvents">
-            <img src="imgs/pictures/Services/copEvents.jpg" alt="copEvents">
-            <h3>🧑‍💼 Corporate Events</h3>
-            <p>Host professional events with engaging team-building activities, award ceremonies, and networking experiences.</p>
+        <!-- 2 Corporate Events -->
+        <div class="service-item" data-type="copEvents">
+            <img src="imgs/pictures/Services/copEvents.jpg" alt="Corporate Events">
+            <div class="service-info">
+                <h3>🧑‍💼 Corporate Events</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Venue sourcing and layout
+                    <br>• AV setup (projector, mic, PA)
+                    <br>• Program coordination & MC
+                    <br>• Catering coordination (light bites to sit-down)
+                    <br>• Branding & signage
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$1,200</span> — Day coordination + AV basics</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$2,500</span> — + Catering management + Branding</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$5,000</span> — + Full production + Post-event report</p>
+                </div>
+                <div class="meta">Attendees: up to 200 · Quote for larger groups</div>
+            </div>
         </div>
 
-        <div class="card" data-type="wedding">
-            <img src="imgs/pictures/Services/wedding.jpg" alt="wedding">
-            <h3>💍 Wedding & Engagement</h3>
-            <p>Create unforgettable weddings and engagement parties with elegant decor, catering, and personalized touches.</p>
+        <!-- 3 Wedding & Engagement -->
+        <div class="service-item" data-type="wedding">
+            <img src="imgs/pictures/Services/wedding.jpg" alt="Wedding & Engagement">
+            <div class="service-info">
+                <h3>💍 Wedding & Engagement</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Full design concept & timeline
+                    <br>• Vendor coordination (catering, florals, music)
+                    <br>• Day-of coordination & staffing
+                    <br>• Décor, lighting & seating plan
+                    <br>• Photography & videography add-ons
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$2,500</span> — Day coordination + simple décor</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$6,500</span> — + Full design + vendor management</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$15,000</span> — + Luxury production + extended coverage</p>
+                </div>
+                <div class="meta">Custom quotes available for destination weddings</div>
+            </div>
         </div>
 
-        <div class="card" data-type="babyShower">
-            <img src="imgs/pictures/Services/babyShower.jpg" alt="babyShower">
-            <h3>👶 Baby Shower & Gender Reveal</h3>
-            <p>Celebrate your little one with themed games, creative reveals, and memorable keepsakes for family and friends.</p>
+        <!-- 4 Baby Shower & Gender Reveal -->
+        <div class="service-item" data-type="babyShower">
+            <img src="imgs/pictures/Services/babyShower.jpg" alt="Baby Shower & Gender Reveal">
+            <div class="service-info">
+                <h3>👶 Baby Shower & Gender Reveal</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Soft-themed décor + keepsake table
+                    <br>• Games & gentle entertainment
+                    <br>• Gender-reveal options (confetti, cake, balloon)
+                    <br>• Catering (light brunch or dessert)
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$350</span> — Decor + simple reveal</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$650</span> — + Games + dessert table</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$1,200</span> — + Photographer + personalized favors</p>
+                </div>
+                <div class="meta">Ideal for intimate gatherings (10–60 guests)</div>
+            </div>
         </div>
 
-        <div class="card" data-type="themedParty">
-            <img src="imgs/pictures/Services/themedParty.jpg" alt="themedParty">
-            <h3>🎭 Themed Costume Party</h3>
-            <p>Bring your favorite characters to life with fun costumes, decorations, and interactive games for everyone.</p>
+        <!-- 5 Themed Costume Party -->
+        <div class="service-item" data-type="themedParty">
+            <img src="imgs/pictures/Services/themedParty.jpg" alt="Themed Costume Party">
+            <div class="service-info">
+                <h3>🎭 Themed Costume Party</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Concept design (era, movie, fantasy)
+                    <br>• Costume suggestions & prop rentals
+                    <br>• Photo backdrops & interactive stations
+                    <br>• Themed music playlist & lighting cues
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$480</span> — Theme decor + playlist</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$900</span> — + Props + photo corner</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$1,800</span> — + Performer/entertainer + full production</p>
+                </div>
+                <div class="meta">Great for private parties and club nights</div>
+            </div>
         </div>
 
-        <div class="card" data-type="summerParty">
-            <img src="imgs/pictures/Services/summerParty.jpg" alt="summerParty">
-            <h3>🏖️ Outdoor & Summer Parties</h3>
-            <p>Enjoy sun-filled activities, outdoor games, and refreshing treats for summer celebrations.</p>
+        <!-- 6 Outdoor & Summer Parties -->
+        <div class="service-item" data-type="summerParty">
+            <img src="imgs/pictures/Services/summerParty.jpg" alt="Outdoor & Summer Parties">
+            <div class="service-info">
+                <h3>🏖️ Outdoor & Summer Parties</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Weather contingency & permits
+                    <br>• Outdoor seating & shade solutions
+                    <br>• BBQ/food stall coordination
+                    <br>• Games, pool or beach setups as required
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$600</span> — Site prep + basic seating</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$1,300</span> — + Catering + sound system</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$2,800</span> — + Full logistics + entertainers</p>
+                </div>
+                <div class="meta">Permits & location fees may be additional</div>
+            </div>
         </div>
 
-        <div class="card" data-type="kidsEvent">
-            <img src="imgs/pictures/Services/kidsEvent.jpg" alt="kidsEvent">
-            <h3>👨‍👩‍👧‍👦 Family & Kids Events</h3>
-            <p>Fun-filled gatherings with games, crafts, and activities that bring the whole family together.</p>
+        <!-- 7 Family & Kids Events -->
+        <div class="service-item" data-type="kidsEvent">
+            <img src="imgs/pictures/Services/kidsEvent.jpg" alt="Family & Kids Events">
+            <div class="service-info">
+                <h3>👨‍👩‍👧‍👦 Family & Kids Events</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Age-appropriate activities & craft stations
+                    <br>• Safety staffing & child-friendly catering
+                    <br>• Character appearances or magicians
+                    <br>• Quiet/rest area for parents
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$250</span> — Activities + supervision</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$550</span> — + Performer + snacks</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$1,000</span> — + Full entertainment package</p>
+                </div>
+                <div class="meta">Child safety policies required for bookings</div>
+            </div>
         </div>
 
-        <div class="card" data-type="holidayCelebrations">
-            <img src="imgs/pictures/Services/holidayCelebrations.jpg" alt="holidayCelebrations">
-            <h3>🎃 Holiday Celebrations</h3>
-            <p>Celebrate holidays with themed activities, festive decorations, and joyful traditions for all ages.</p>
+        <!-- 8 Holiday Celebrations -->
+        <div class="service-item" data-type="holidayCelebrations">
+            <img src="imgs/pictures/Services/holidayCelebrations.jpg" alt="Holiday Celebrations">
+            <div class="service-info">
+                <h3>🎃 Holiday Celebrations</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Holiday-themed decor & activities
+                    <br>• Seasonal menus & desserts
+                    <br>• Music & lighting appropriate to theme
+                    <br>• Gift-wrapping/kiddie corner (if needed)
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$380</span> — Decor + playlist</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$850</span> — + Catering + activities</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$1,900</span> — + Live entertainment + full production</p>
+                </div>
+                <div class="meta">Peak-season surcharges may apply</div>
+            </div>
         </div>
 
-        <div class="card" data-type="graduation">
-            <img src="imgs/pictures/Services/graduation.jpg" alt="graduation">
-            <h3>💃 Graduation & Prom Party</h3>
-            <p>Mark milestone achievements with stylish decor, music, and dance parties for students and friends.</p>
+        <!-- 9 Graduation & Prom Party -->
+        <div class="service-item" data-type="graduation">
+            <img src="imgs/pictures/Services/graduation.jpg" alt="Graduation & Prom Party">
+            <div class="service-info">
+                <h3>💃 Graduation & Prom Party</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Formal décor & stage setup
+                    <br>• DJ or live band + dance floor lighting
+                    <br>• Photography & memory wall
+                    <br>• Security & crowd management as needed
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$1,000</span> — DJ + basic decor</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$2,200</span> — + Photographer + upgraded lighting</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$4,500</span> — + Full event production</p>
+                </div>
+                <div class="meta">School permission & chaperones often required</div>
+            </div>
         </div>
 
-        <div class="card" data-type="charityEvents">
-            <img src="imgs/pictures/Services/charityEvents.jpg" alt="charityEvents">
-            <h3>💫 Charity or Community Events</h3>
-            <p>Organize impactful events that bring the community together while supporting meaningful causes.</p>
+        <!-- 10 Charity or Community Events -->
+        <div class="service-item" data-type="charityEvents">
+            <img src="imgs/pictures/Services/charityEvents.jpg" alt="Charity or Community Events">
+            <div class="service-info">
+                <h3>💫 Charity or Community Events</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Fundraising format & registration
+                    <br>• Volunteer coordination & logistics
+                    <br>• AV & stage management for speakers
+                    <br>• Promotion support & signage
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$700</span> — Event coordination support</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$1,500</span> — + Volunteer management + AV</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$3,200</span> — + Full production + marketing</p>
+                </div>
+                <div class="meta">Discounts for non-profit organizations available</div>
+            </div>
         </div>
 
-        <div class="card" data-type="promParty">
-            <img src="imgs/pictures/Services/promParty.jpg" alt="promParty">
-            <h3>🎓 Graduation & Prom Party</h3>
-            <p>Celebrate academic achievements with memorable ceremonies, entertainment, and social gatherings.</p>
+        <!-- 11 Graduation & Prom Party (duplicate style entry from original list) -->
+        <div class="service-item" data-type="promParty">
+            <img src="imgs/pictures/Services/promParty.jpg" alt="Prom Party">
+            <div class="service-info">
+                <h3>🎓 Prom & School Celebration</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Ticketing & guest list management
+                    <br>• Decor theme & centerpiece design
+                    <br>• DJ, lighting, and photo setup
+                    <br>• On-site coordination during event
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$900</span> — DJ + decor</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$1,800</span> — + Photographer + upgraded theme</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$3,500</span> — + Full production + security</p>
+                </div>
+                <div class="meta">Capacity planning required for school venues</div>
+            </div>
         </div>
 
-        <div class="card" data-type="seasonalCele">
-            <img src="imgs/pictures/Services/seasonalCele.jpg" alt="seasonalCele">
-            <h3>🎄 Holiday & Seasonal Celebrations</h3>
-            <p>Enjoy festive seasonal parties with decorations, music, games, and special treats for everyone.</p>
+        <!-- 12 Holiday & Seasonal Celebrations -->
+        <div class="service-item" data-type="seasonalCele">
+            <img src="imgs/pictures/Services/seasonalCele.jpg" alt="Seasonal Celebrations">
+            <div class="service-info">
+                <h3>🎄 Holiday & Seasonal Celebrations</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Seasonal themes (Christmas, Lunar New Year, etc.)
+                    <br>• Themed menus and seasonal giveaways
+                    <br>• Entertainment tailored to season
+                    <br>• Logistics for holiday hours & permits
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$420</span> — Themed decor + basic catering</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$1,000</span> — + Entertainment + themed desserts</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$2,200</span> — + Large-scale production</p>
+                </div>
+                <div class="meta">Book early for holiday dates</div>
+            </div>
         </div>
 
-        <div class="card" data-type="musicFestival">
-            <img src="imgs/pictures/Services/musicFestival.jpg" alt="musicFestival">
-            <h3>🎤 Music Festival & DJ Night</h3>
-            <p>Bring the beats alive with live music, DJ performances, and dance experiences for all attendees.</p>
+        <!-- 13 Music Festival & DJ Night -->
+        <div class="service-item" data-type="musicFestival">
+            <img src="imgs/pictures/Services/musicFestival.jpg" alt="Music Festival & DJ Night">
+            <div class="service-info">
+                <h3>🎤 Music Festival & DJ Night</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Lineup planning & artist liaison
+                    <br>• Professional sound & stage lighting
+                    <br>• Crowd control & backstage logistics
+                    <br>• Ticketing & on-site production crew
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$3,000</span> — Small-scale DJ night</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$8,000</span> — + Multiple acts + improved staging</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$25,000</span> — + Festival-grade production</p>
+                </div>
+                <div class="meta">Large events require permits & insurance</div>
+            </div>
         </div>
 
-        <div class="card" data-type="productLaunch">
-            <img src="imgs/pictures/Services/productLaunch.jpg" alt="productLaunch">
-            <h3>💼 Product Launch & Brand Party</h3>
-            <p>Highlight your brand with creative launches, interactive showcases, and engaging marketing events.</p>
+        <!-- 14 Product Launch & Brand Party -->
+        <div class="service-item" data-type="productLaunch">
+            <img src="imgs/pictures/Services/productLaunch.jpg" alt="Product Launch & Brand Party">
+            <div class="service-info">
+                <h3>💼 Product Launch & Brand Party</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Launch concept & creative direction
+                    <br>• Product staging & demo zones
+                    <br>• Media & influencer coordination
+                    <br>• PR support and post-event analytics
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$1,500</span> — Concept + staging</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$4,500</span> — + Media outreach + demo staffing</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$12,000</span> — + Full campaign + analytics</p>
+                </div>
+                <div class="meta">Sponsorship & media packages available</div>
+            </div>
         </div>
 
-        <div class="card" data-type="petEvents">
-            <img src="imgs/pictures/Services/petEvents.jpg" alt="petEvents">
-            <h3>🐾 Pet-Friendly Events</h3>
-            <p>Celebrate with your furry friends through fun pet activities, treats, and pet-safe decorations.</p>
+        <!-- 15 Pet-Friendly Events -->
+        <div class="service-item" data-type="petEvents">
+            <img src="imgs/pictures/Services/petEvents.jpg" alt="Pet-Friendly Events">
+            <div class="service-info">
+                <h3>🐾 Pet-Friendly Events</h3>
+                <p class="requirements">
+                    Requirements:
+                    <br>• Pet-safe décor & menu (treats)
+                    <br>• Animal welfare & on-site handlers
+                    <br>• Play zones and photo booths
+                    <br>• Waste management & safety signage
+                </p>
+                <div class="pricing">
+                    <p><span class="label">Basic:</span> <span class="amount">$280</span> — Pet-friendly decor + treats</p>
+                    <p><span class="label">Standard:</span> <span class="amount">$650</span> — + Handlers + play zones</p>
+                    <p><span class="label">Premium:</span> <span class="amount">$1,400</span> — + Full animal services + photographer</p>
+                </div>
+                <div class="meta">All animals must have up-to-date vaccinations</div>
+            </div>
         </div>
+
     </section>
+
 </main>
 
 

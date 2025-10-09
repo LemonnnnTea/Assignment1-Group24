@@ -338,10 +338,10 @@
                 <label for="date">Event Date</label>
                 <input type="date" id="date" name="date" required />
             </div>
+            <!-- 恢复 Party Theme 选项 -->
             <div class="form-group">
                 <label for="partyType">Party Theme</label>
                 <select id="partyType" name="partyType" required>
-                    <option value="">Select a theme</option>
                     <optgroup label="Children's Parties">
                         <option value="Princess Party">Princess Party</option>
                         <option value="Superhero Adventure">Superhero Adventure</option>
@@ -431,5 +431,53 @@
 </footer>
 
 <script src = "js/events.js"></script>
+<script>
+    // 参考 booking.html 的弹窗处理方式
+    document.addEventListener('DOMContentLoaded', function () {
+        // 打开弹窗
+        document.getElementById('open-booking').addEventListener('click', function () {
+            document.getElementById('bookingModal').style.display = 'block';
+            // 不自动选主题
+            document.getElementById('partyType').selectedIndex = 0;
+        });
+
+        // 关闭弹窗
+        document.getElementById('closeModal').addEventListener('click', function () {
+            document.getElementById('bookingModal').style.display = 'none';
+        });
+
+        // 关闭成功提示
+        document.getElementById('closeSuccess').addEventListener('click', function () {
+            document.getElementById('successMessage').style.display = 'none';
+        });
+
+        // 提交表单
+        document.getElementById('bookingForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            document.getElementById('bookingModal').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            this.reset();
+        });
+
+        // 支持点击“Book This Event”按钮也弹窗，并自动填入主题
+        document.querySelectorAll('.card .primary').forEach(function(btn){
+            btn.addEventListener('click', function(e){
+                e.preventDefault();
+                // 获取主题名
+                var card = btn.closest('.card');
+                var theme = card.querySelector('h3').textContent.trim();
+                document.getElementById('bookingModal').style.display = 'block';
+                // 自动选中主题
+                var select = document.getElementById('partyType');
+                for (var i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value === theme) {
+                        select.selectedIndex = i;
+                        break;
+                    }
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
