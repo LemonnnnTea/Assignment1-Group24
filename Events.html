@@ -7,7 +7,6 @@
     <meta name="description" content="Karoomba! — themed party planning, decorations, and full-event management." />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/layout.css" />
-    <!-- 同步 Booking 页核心样式（颜色、按钮、弹窗风格统一） -->
     <style>
         :root {
             --primary: #FF6B6B;
@@ -19,7 +18,6 @@
             --gray: #6C757D;
             --gray-light: #F8F9FA;
         }
-        /* 同步 Booking 页按钮交互 */
         button.primary:hover {
             background-color: var(--primary-dark);
         }
@@ -37,7 +35,6 @@
             background: var(--secondary);
             color: white;
         }
-        /* 同步 Booking 页成功弹窗（和 Booking 完全一致） */
         #successMessage {
             display: none;
             position: fixed;
@@ -75,7 +72,6 @@
             transition: background 0.3s ease;
         }
         #closeSuccess:hover { background-color: #3db8af; }
-        /* 同步 Booking 页人数标签 */
         .capacity-badge {
             background-color: var(--accent);
             color: var(--dark);
@@ -85,6 +81,66 @@
             font-weight: bold;
             display: inline-block;
             margin-top: 4px;
+        }
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+            margin-bottom: 14px;
+        }
+        .card h3 {
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+        .card .capacity-badge {
+            margin-bottom: 6px;
+        }
+        .card p {
+            color: var(--muted, #6C757D);
+            font-size: 0.95rem;
+        }
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .filter-btn {
+            background: var(--gray-light);
+            color: var(--dark);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -99,27 +155,24 @@
             </div>
         </div>
         <nav role="navigation" aria-label="Main navigation">
-            <a href=" ">Home</a >
-            <a href="Services.html">Services</a >
-            <a href="Gallery.html">Gallery</a >
-            <a href="Events.html">Events</a >
-            <a href="Contactus.html">Contact</a >
-            <a href="Booking.html">Booking</a >
+            <a href="index.html">Home</a>
+            <a href="Services.html">Services</a>
+            <a href="Gallery.html">Gallery</a>
+            <a href="Events.html">Events</a>
+            <a href="Contactus.html">Contact</a>
+            <a href="Booking.html">Booking</a>
         </nav>
         <div class="center">
             <button class="primary" id="open-booking" onclick="openModal()">Book Now</button>
         </div>
     </header>
 
-    <!-- ########## Events 主体内容（对齐 Booking 页调整）########## -->
     <main>
-        <!-- 1. 标题简介：同步 Booking 页“主题策划”定位 -->
         <section class="events-intro" style="margin-top: 28px; text-align: center;">
             <h2 style="margin: 0 0 12px 0; color: var(--dark); font-size: 1.8rem;">Upcoming & Featured Events</h2>
-            <p style="max-width: 700px; margin: 0 auto; color: var(--muted);">Join our curated parties—from kids' princess adventures to adult masquerades. All match Karoomba's themed planning, with clear guest capacity and tailored setups!</p >
+            <p style="max-width: 700px; margin: 0 auto; color: var(--muted);">Join our curated parties—from kids' princess adventures to adult masquerades. All match Karoomba's themed planning, with clear guest capacity and tailored setups!</p>
         </section>
 
-        <!-- 2. 筛选栏：同步 Booking 页6大主题分类（替换原分类，完全一致） -->
         <section class="events-filter" style="margin: 32px 0 20px; text-align: center;">
             <div class="filter-buttons">
                 <button class="filter-btn active" data-filter="all">All Events</button>
@@ -128,110 +181,276 @@
                 <button class="filter-btn" data-filter="adult">Adult Celebrations</button>
                 <button class="filter-btn" data-filter="corporate">Corporate Events</button>
                 <button class="filter-btn" data-filter="seasonal">Seasonal & Holiday</button>
+                <button class="filter-btn" data-filter="creative">Creative & Unique</button>
             </div>
         </section>
 
-        <!-- 3. 活动卡片：内容同步 Booking 页“主题+人数+配置” -->
+        <!-- 活动卡片：与Booking主题一一对应 -->
         <section class="events-grid grid" id="events-grid">
-           
-    <!-- 活动1：儿童主题（Princess Theme Party - 对应 Booking 儿童分类） -->
-    <div class="card" data-type="children" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-        <img src="https://p3-doubao-search-sign.byteimg.com/labis/83ff9129df07cb6b910d8204322ce339~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1765165379&x-signature=NUkrwE9btVhGkw%2FD%2Bz3URtRzJXE%3D" alt="Princess Theme Party" style="width: 400px; height: 200px; border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px; object-fit: cover;">
-        <h3 style="font-size: 1.1rem; color: var(--dark);">Princess Theme Party</h3>
-        <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
-            <span>📅 Nov 20, 2025</span>
-            <span>⏰ 2:00 PM - 5:00 PM</span>
-        </div>
-        <p style="margin: 0 0 8px; color: var(--muted); font-size: 0.9rem;">Tiara crafts, royal games, and princess character visits—ideal for young kids!</p >
-        <div class="capacity-badge">10-20 kids (ages 3-8)</div>
-        <p style="margin: 8px 0 14px; color: var(--dark); font-size: 0.85rem; font-weight: 600;">Includes: Themed decor + 2 party facilitators</p >
-        <div style="display: flex; gap: 8px;">
-            <button class="primary" style="flex: 1;" onclick="openModal()">Book This Event</button>
-            <button class="secondary" style="flex: 1;">View Details</button>
-        </div>
-    </div>
 
-    <!-- 活动2：青少年主题（Neon Glow Party - 对应 Booking 青少年分类） -->
-    <div class="card" data-type="teen" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-        <img src="https://p3-doubao-search-sign.byteimg.com/labis/e7a209cc89551b67895c0f944a794fd1~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1765165390&x-signature=JwCEj3lFYpvkL2c%2BPguvHNqI4z4%3D" alt="Neon Glow Theme Party" style="width: 400px; height: 200px; border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px; object-fit: cover;">
-        <h3 style="font-size: 1.1rem; color: var(--dark);">Neon Glow Party</h3>
-        <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
-            <span>📅 Dec 05, 2025</span>
-            <span>⏰ 7:00 PM - 10:00 PM</span>
-        </div>
-        <p style="margin: 0 0 8px; color: var(--muted); font-size: 0.9rem;">Glow sticks, DJ music, and blacklight games—perfect for teens!</p >
-        <div class="capacity-badge">30-75 people (ages 13-25)</div>
-        <p style="margin: 8px 0 14px; color: var(--dark); font-size: 0.85rem; font-weight: 600;">Includes: Glow decor + professional DJ</p >
-        <div style="display: flex; gap: 8px;">
-            <button class="primary" style="flex: 1;" onclick="openModal()">Book This Event</button>
-            <button class="secondary" style="flex: 1;">View Details</button>
-        </div>
-    </div>
-    <!-- 活动3：成人主题（Masquerade Ball - 假面舞会） -->
-    <div class="card" data-type="adult" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-      <img src="imgs/pictures/Gallery/Valentine's day3.jpg" alt="Valentine's day couple celebration" class="gallery-img" style="width: 400px; height: 200px; object-fit: cover;">
-        <h3 style="font-size: 1.1rem; color: var(--dark);">Masquerade Ball</h3>
-        <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
-            <span>📅 Dec 22, 2025</span>
-            <span>⏰ 6:00 PM - 11:00 PM</span>
-        </div>
-        <p style="margin: 0 0 8px; color: var(--muted); font-size: 0.9rem;">Elegant decor, live music, and mask favors—sophisticated adult celebration!</p >
-        <div class="capacity-badge">30-100 people (adults)</div>
-        <p style="margin: 8px 0 14px; color: var(--dark); font-size: 0.85rem; font-weight: 600;">Includes: Premium decor + live band</p >
-        <div style="display: flex; gap: 8px;">
-            <button class="primary" style="flex: 1;" onclick="openModal()">Book This Event</button>
-            <button class="secondary" style="flex: 1;">View Details</button>
-        </div>
-    </div>
+            <!-- Children's Parties -->
+            <div class="card" data-type="children">
+                <img src="imgs/children/princess.jpg" alt="Princess Party">
+                <h3>Princess Party</h3>
+                <div class="capacity-badge">10-20 kids</div>
+                <p>Tiara crafts, royal games, and princess character visits—ideal for ages 3-10!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Themed decorations, games, 2-3 facilitators</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="children">
+                <img src="imgs/children/superhero.jpg" alt="Superhero Adventure">
+                <h3>Superhero Adventure</h3>
+                <div class="capacity-badge">10-25 kids</div>
+                <p>Superhero training, obstacle courses, and hero meet-and-greet—ideal for ages 3-10!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Themed decorations, games, 2-3 facilitators</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="children">
+                <img src="imgs/children/pirate.jpg" alt="Pirate Treasure Hunt">
+                <h3>Pirate Treasure Hunt</h3>
+                <div class="capacity-badge">8-15 kids</div>
+                <p>Pirate costumes, treasure maps, and adventure games—perfect for little explorers!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Themed decorations, games, 2-3 facilitators</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="children">
+                <img src="imgs/children/dinosaur.jpg" alt="Dinosaur Discovery">
+                <h3>Dinosaur Discovery</h3>
+                <div class="capacity-badge">12-20 kids</div>
+                <p>Dino digs, fossil crafts, and prehistoric games—fun for all dino fans!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Themed decorations, games, 2-3 facilitators</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="children">
+                <img src="imgs/children/safari.jpg" alt="Animal Safari">
+                <h3>Animal Safari</h3>
+                <div class="capacity-badge">10-18 kids</div>
+                <p>Safari hats, animal games, and wild adventures—great for animal lovers!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Themed decorations, games, 2-3 facilitators</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
 
-    <!-- 活动4：季节性主题（Christmas Wonderland - 圣诞派对） -->
-    <div class="card" data-type="seasonal" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-        <img src="https://picsum.photos/id/1062/400/200" alt="Christmas Wonderland Party" style="width: 400px; height: 200px; border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px; object-fit: cover;">
-        <h3 style="font-size: 1.1rem; color: var(--dark);">Christmas Wonderland Party</h3>
-        <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
-            <span>📅 Dec 24, 2025</span>
-            <span>⏰ 3:00 PM - 9:00 PM</span>
-        </div>
-        <p style="margin: 0 0 8px; color: var(--muted); font-size: 0.9rem;">Snowy decor, Santa visit, and holiday treats—for all ages!</p >
-        <div class="capacity-badge">20-80 people (family-friendly)</div>
-        <p style="margin: 8px 0 14px; color: var(--dark); font-size: 0.85rem; font-weight: 600;">Includes: Holiday decor + Santa actor</p >
-        <div style="display: flex; gap: 8px;">
-            <button class="primary" style="flex: 1;" onclick="openModal()">Book This Event</button>
-            <button class="secondary" style="flex: 1;">View Details</button>
-        </div>
-    </div>
+            <!-- Teen & Young Adult -->
+            <div class="card" data-type="teen">
+                <img src="imgs/teen/gaming.jpg" alt="Gaming Tournament">
+                <h3>Gaming Tournament</h3>
+                <div class="capacity-badge">15-30 people</div>
+                <p>Video game competitions, prizes, and snacks—perfect for teens and young adults!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Modern music, interactive activities, DJ, party coordinators</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="teen">
+                <img src="imgs/teen/beach.jpg" alt="Beach Luau">
+                <h3>Beach Luau</h3>
+                <div class="capacity-badge">20-50 people</div>
+                <p>Tropical decor, limbo contests, and beach games—summer fun for everyone!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Modern music, interactive activities, DJ, party coordinators</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="teen">
+                <img src="imgs/teen/hollywood.jpg" alt="Hollywood Red Carpet">
+                <h3>Hollywood Red Carpet</h3>
+                <div class="capacity-badge">25-60 people</div>
+                <p>Walk the red carpet, photo ops, and movie trivia—feel like a star!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Modern music, interactive activities, DJ, party coordinators</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="teen">
+                <img src="imgs/teen/neon.jpg" alt="Neon Glow Party">
+                <h3>Neon Glow Party</h3>
+                <div class="capacity-badge">30-75 people</div>
+                <p>Glow sticks, DJ music, and blacklight games—perfect for teens!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Modern music, interactive activities, DJ, party coordinators</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="teen">
+                <img src="imgs/teen/sports.jpg" alt="Sports Celebration">
+                <h3>Sports Celebration</h3>
+                <div class="capacity-badge">20-40 people</div>
+                <p>Sports games, team jerseys, and fun competitions—cheer for your team!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Modern music, interactive activities, DJ, party coordinators</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
 
-    <!-- 活动5：企业主题（Team Building Olympics - 企业团建） -->
-    <div class="card" data-type="corporate" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-        <img src="https://picsum.photos/id/1059/400/200" alt="Corporate Team Building Event" style="width: 400px; height: 200px; border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px; object-fit: cover;">
-        <h3 style="font-size: 1.1rem; color: var(--dark);">Team Building Olympics</h3>
-        <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
-            <span>📅 Jan 18, 2026</span>
-            <span>⏰ 10:00 AM - 3:00 PM</span>
-        </div>
-        <p style="margin: 0 0 8px; color: var(--muted); font-size: 0.9rem;">Collaborative games, team challenges, and catered lunch—boost team spirit!</p >
-        <div class="capacity-badge">20-100 employees</div>
-        <p style="margin: 8px 0 14px; color: var(--dark); font-size: 0.85rem; font-weight: 600;">Includes: Game facilitators + catered lunch</p >
-        <div style="display: flex; gap: 8px;">
-            <button class="primary" style="flex: 1;" onclick="openModal()">Book This Event</button>
-            <button class="secondary" style="flex: 1;">View Details</button>
-        </div>
-    </div>
-</section>
-        <!-- 4. 定制CTA：同步 Booking 页“Creative & Unique”主题 -->
+            <!-- Adult Celebrations -->
+            <div class="card" data-type="adult">
+                <img src="imgs/adult/masquerade.jpg" alt="Masquerade Ball">
+                <h3>Masquerade Ball</h3>
+                <div class="capacity-badge">30-100 people</div>
+                <p>Elegant decor, live music, and mask favors—sophisticated adult celebration!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Premium decorations, sophisticated entertainment, professional staff</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="adult">
+                <img src="imgs/adult/gatsby.jpg" alt="Great Gatsby 1920s">
+                <h3>Great Gatsby 1920s</h3>
+                <div class="capacity-badge">25-80 people</div>
+                <p>Roaring 20s style, jazz music, and vintage cocktails—party like Gatsby!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Premium decorations, sophisticated entertainment, professional staff</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="adult">
+                <img src="imgs/adult/tropical.jpg" alt="Tropical Paradise">
+                <h3>Tropical Paradise</h3>
+                <div class="capacity-badge">40-120 people</div>
+                <p>Island vibes, tropical drinks, and live band—relax and enjoy!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Premium decorations, sophisticated entertainment, professional staff</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="adult">
+                <img src="imgs/adult/wine.jpg" alt="Wine & Cheese Tasting">
+                <h3>Wine & Cheese Tasting</h3>
+                <div class="capacity-badge">15-40 people</div>
+                <p>Sommelier-led tastings, gourmet cheeses, and elegant ambiance.</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Premium decorations, sophisticated entertainment, professional staff</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="adult">
+                <img src="imgs/adult/casino.jpg" alt="Casino Night">
+                <h3>Casino Night</h3>
+                <div class="capacity-badge">20-60 people</div>
+                <p>Blackjack, roulette, and casino decor—try your luck in style!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Premium decorations, sophisticated entertainment, professional staff</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+
+            <!-- Corporate Events -->
+            <div class="card" data-type="corporate">
+                <img src="imgs/corporate/olympics.jpg" alt="Team Building Olympics">
+                <h3>Team Building Olympics</h3>
+                <div class="capacity-badge">20-100 people</div>
+                <p>Collaborative games, team challenges, and catered lunch—boost team spirit!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Team-building activities, networking, corporate branding</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="corporate">
+                <img src="imgs/corporate/workshop.jpg" alt="Innovation Workshop">
+                <h3>Innovation Workshop</h3>
+                <div class="capacity-badge">15-50 people</div>
+                <p>Creative sessions, brainstorming, and interactive exercises for your team.</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Team-building activities, networking, corporate branding</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="corporate">
+                <img src="imgs/corporate/gala.jpg" alt="Annual Gala Dinner">
+                <h3>Annual Gala Dinner</h3>
+                <div class="capacity-badge">50-200 people</div>
+                <p>Formal dinner, awards, and entertainment—celebrate company milestones!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Team-building activities, networking, corporate branding</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="corporate">
+                <img src="imgs/corporate/launch.jpg" alt="Product Launch Party">
+                <h3>Product Launch Party</h3>
+                <div class="capacity-badge">30-150 people</div>
+                <p>Branding, demos, and press—make your launch unforgettable!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Team-building activities, networking, corporate branding</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="corporate">
+                <img src="imgs/corporate/holiday.jpg" alt="Holiday Office Party">
+                <h3>Holiday Office Party</h3>
+                <div class="capacity-badge">25-120 people</div>
+                <p>Festive decor, food, and fun—celebrate with your colleagues!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Team-building activities, networking, corporate branding</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+
+            <!-- Seasonal & Holiday -->
+            <div class="card" data-type="seasonal">
+                <img src="imgs/seasonal/christmas.jpg" alt="Christmas Wonderland">
+                <h3>Christmas Wonderland</h3>
+                <div class="capacity-badge">20-80 people</div>
+                <p>Snowy decor, Santa visit, and holiday treats—for all ages!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Seasonal decorations, themed food, holiday entertainment</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="seasonal">
+                <img src="imgs/seasonal/halloween.jpg" alt="Halloween Spooktacular">
+                <h3>Halloween Spooktacular</h3>
+                <div class="capacity-badge">25-90 people</div>
+                <p>Costume contests, spooky games, and themed treats—frightfully fun!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Seasonal decorations, themed food, holiday entertainment</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="seasonal">
+                <img src="imgs/seasonal/summer.jpg" alt="Summer Beach Bash">
+                <h3>Summer Beach Bash</h3>
+                <div class="capacity-badge">30-100 people</div>
+                <p>Beach games, BBQ, and sunshine—summer fun for everyone!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Seasonal decorations, themed food, holiday entertainment</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="seasonal">
+                <img src="imgs/seasonal/spring.jpg" alt="Spring Garden Party">
+                <h3>Spring Garden Party</h3>
+                <div class="capacity-badge">20-60 people</div>
+                <p>Floral decor, outdoor games, and fresh treats—enjoy the spring!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Seasonal decorations, themed food, holiday entertainment</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="seasonal">
+                <img src="imgs/seasonal/newyear.jpg" alt="New Year's Eve Countdown">
+                <h3>New Year's Eve Countdown</h3>
+                <div class="capacity-badge">40-150 people</div>
+                <p>Countdown party, music, and midnight toast—ring in the new year!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Seasonal decorations, themed food, holiday entertainment</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+
+            <!-- Creative & Unique -->
+            <div class="card" data-type="creative">
+                <img src="imgs/creative/murder.jpg" alt="Murder Mystery Night">
+                <h3>Murder Mystery Night</h3>
+                <div class="capacity-badge">15-40 people</div>
+                <p>Interactive whodunit, character roles, and suspenseful fun for all!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Specialized equipment, facilitators, unique entertainment</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="creative">
+                <img src="imgs/creative/escape.jpg" alt="Escape Room Adventure">
+                <h3>Escape Room Adventure</h3>
+                <div class="capacity-badge">10-30 people</div>
+                <p>Puzzles, clues, and teamwork—can you escape in time?</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Specialized equipment, facilitators, unique entertainment</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="creative">
+                <img src="imgs/creative/art.jpg" alt="Art & Craft Party">
+                <h3>Art & Craft Party</h3>
+                <div class="capacity-badge">12-25 people</div>
+                <p>Creative workshops, art supplies, and take-home masterpieces!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Specialized equipment, facilitators, unique entertainment</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="creative">
+                <img src="imgs/creative/science.jpg" alt="Science Lab Experience">
+                <h3>Science Lab Experience</h3>
+                <div class="capacity-badge">10-20 people</div>
+                <p>Hands-on experiments, lab coats, and scientific fun for all ages!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Specialized equipment, facilitators, unique entertainment</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+            <div class="card" data-type="creative">
+                <img src="imgs/creative/movie.jpg" alt="Outdoor Movie Night">
+                <h3>Outdoor Movie Night</h3>
+                <div class="capacity-badge">20-80 people</div>
+                <p>Big screen, popcorn, and cozy blankets—movie magic under the stars!</p>
+                <p style="font-size:0.85rem;font-weight:600;">Includes: Specialized equipment, facilitators, unique entertainment</p>
+                <button class="primary" onclick="openModal()">Book This Event</button>
+            </div>
+        </section>
+
         <section class="events-cta gallery-cta" style="margin-top: 40px;">
             <div class="cta-card">
                 <h3>Want a Unique Event? Try Our Creative Themes!</h3>
-                <p>From Murder Mystery Nights to Outdoor Movie Parties—tell us your vision, and we’ll tailor a one-of-a-kind experience (10-80 people).</p >
-                <a href="Booking.html"><button class="primary">Plan My Creative Event</button></a >
+                <p>From Murder Mystery Nights to Outdoor Movie Parties—tell us your vision, and we’ll tailor a one-of-a-kind experience (10-80 people).</p>
+                <a href="Booking.html"><button class="primary">Plan My Creative Event</button></a>
             </div>
         </section>
     </main>
-    <!-- ########## Events 主体内容结束 ########## -->
-
 </div>
 
-<!-- 1. 预约弹窗：完全同步 Booking 页表单字段（下拉主题+人数+必填项） -->
 <div id="bookingModal">
     <div class="modal-content">
         <button class="close-btn" id="closeModal" aria-label="Close">&times;</button>
@@ -241,22 +460,18 @@
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required />
             </div>
-
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required />
             </div>
-
             <div class="form-group">
                 <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone" required />
             </div>
-
             <div class="form-group">
                 <label for="date">Event Date</label>
                 <input type="date" id="date" name="date" required />
             </div>
-
             <div class="form-group">
                 <label for="partyType">Party Theme</label>
                 <select id="partyType" name="partyType" required>
@@ -305,32 +520,27 @@
                     </optgroup>
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="guests">Number of Guests</label>
                 <input type="number" id="guests" name="guests" min="1" max="200" required />
             </div>
-
             <div class="form-group">
                 <label for="details">Additional Details</label>
                 <textarea id="details" name="details" rows="4" placeholder="Tell us more about your event..."></textarea>
             </div>
-
             <button type="submit" class="submit-btn">Submit Booking</button>
         </form>
     </div>
 </div>
 
-<!-- 2. Success Modal (matches Booking page style) -->
 <div id="successMessage">
     <div class="message-box">
         <h2>Reservation Successful!</h2>
-        <p>Thank you for your booking. We will contact you soon to confirm the details.</p >
+        <p>Thank you for your booking. We will contact you soon to confirm the details.</p>
         <button id="closeSuccess">Close</button>
     </div>
 </div>
 
-<!-- Footer (consistent with Booking page) -->
 <footer style="background-color: var(--dark); color: white; padding: 3rem 2rem; text-align: center; margin-top: 3rem;">
     <div class="footer-content" style="max-width: 1200px; margin: 0 auto;">
         <div class="brand" style="display: flex; align-items: center; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
@@ -340,23 +550,20 @@
                 <div class="muted">Theme Parties • Events • Fun</div>
             </div>
         </div>
-
         <div class="footer-links" style="display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; flex-wrap: wrap;">
-            <a href=" " style="color: white; text-decoration: none; transition: color 0.3s;">Home</a >
-            <a href="Services.html" style="color: white; text-decoration: none; transition: color 0.3s;">Services</a >
-            <a href="Gallery.html" style="color: white; text-decoration: none; transition: color 0.3s;">Gallery</a >
-            <a href="Events.html" style="color: white; text-decoration: none; transition: color 0.3s;">Events</a >
-            <a href="Contactus.html" style="color: white; text-decoration: none; transition: color 0.3s;">Contact</a >
-            <a href="Booking.html" style="color: white; text-decoration: none; transition: color 0.3s;">Booking</a >
+            <a href="index.html" style="color: white; text-decoration: none; transition: color 0.3s;">Home</a>
+            <a href="Services.html" style="color: white; text-decoration: none; transition: color 0.3s;">Services</a>
+            <a href="Gallery.html" style="color: white; text-decoration: none; transition: color 0.3s;">Gallery</a>
+            <a href="Events.html" style="color: white; text-decoration: none; transition: color 0.3s;">Events</a>
+            <a href="Contactus.html" style="color: white; text-decoration: none; transition: color 0.3s;">Contact</a>
+            <a href="Booking.html" style="color: white; text-decoration: none; transition: color 0.3s;">Booking</a>
         </div>
-
         <div class="copyright" style="margin-top: 2rem; color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">
             &copy; 2023 Karoomba! All rights reserved.
         </div>
     </div>
 </footer>
 
-<!-- JavaScript (functional consistency with Booking page) -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // 1. Restrict date to today or later
@@ -418,12 +625,9 @@
         // 4. Event Filter Functionality
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                // Toggle active state
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
                 const filter = btn.dataset.filter;
-                // Filter event cards
                 document.querySelectorAll('#events-grid .card').forEach(card => {
                     if (filter === 'all' || card.dataset.type === filter) {
                         card.style.display = 'block';
