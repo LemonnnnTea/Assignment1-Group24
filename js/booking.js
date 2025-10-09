@@ -10,7 +10,7 @@
     input.setAttribute('min', minDate);
 });
 
-    // Modal functionality
+
     const openBtn = document.getElementById('open-booking');
     const heroBtn = document.getElementById('hero-booking');
     const modal = document.getElementById('bookingModal');
@@ -36,7 +36,7 @@
 }
 });
 
-    // Form submissions
+
     const bookingForm = document.getElementById('bookingForm');
     const pageForm = document.getElementById('pageBookingForm');
 
@@ -63,10 +63,10 @@
     pageForm.reset();
 });
 
-    // Close success message
+
     document.getElementById('closeSuccess').addEventListener('click', closeSuccessMessage);
 
-    // Close success message when clicking outside
+
     window.addEventListener('click', (event) => {
     if (event.target === document.getElementById('successMessage')) {
     closeSuccessMessage();

@@ -19,7 +19,6 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// 成功提示
 const bookingForm = document.getElementById('bookingForm');
 const successMessage = document.getElementById('successMessage');
 const closeSuccess = document.getElementById('closeSuccess');
@@ -44,7 +43,6 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// 人数加减
 const decreaseBtn = document.querySelector('.decrease');
 const increaseBtn = document.querySelector('.increase');
 const guestsInput = document.getElementById('guests');

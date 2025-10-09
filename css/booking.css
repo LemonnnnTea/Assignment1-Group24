@@ -39,7 +39,7 @@ button {
     background-color: var(--primary-dark);
 }
 
-/* Hero Section - 修复居中问题 */
+
 .hero {
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: white;
@@ -81,7 +81,7 @@ button {
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-/* Party Themes Section */
+
 .themes-section {
     padding: 4rem 2rem;
     max-width: 1200px;
@@ -206,7 +206,7 @@ button {
     color: var(--dark);
 }
 
-/* Form Styles */
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -255,7 +255,7 @@ textarea {
     background-color: var(--primary-dark);
 }
 
-/* Bottom Booking Form */
+
 #bottomBookingForm {
     background-color: white;
     padding: 3rem 2rem;
@@ -293,31 +293,13 @@ textarea {
     min-width: 200px;
 }
 
-/* Success Message */
 
-
-
-
-/* Footer */
-
-/*.copyright {*/
-/*    margin-top: 2rem;*/
-/*    color: rgba(255,255,255,0.7);*/
-/*    font-size: 0.9rem;*/
-/*}*/
-
-/* Responsive Design */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
         gap: 1rem;
         padding: 1rem;
     }
-
-    /*nav {*/
-    /*    flex-wrap: wrap;*/
-    /*    justify-content: center;*/
-    /*}*/
 
     .hero {
         margin: 0 1rem 2rem 1rem;
