@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Karoomba! — Theme Party Specialists</title>
+    <meta name="description" content="Karoomba! — themed party planning, decorations, and full-event management." />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <!-- 同步 Booking 页核心样式（颜色、按钮、弹窗风格统一） -->
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --primary-dark: #FF5252;
+            --secondary: #4ECDC4;
+            --dark: #292F36;
+            --light: #F7FFF7;
+            --accent: #FFE66D;
+            --gray: #6C757D;
+            --gray-light: #F8F9FA;
+        }
+        /* 同步 Booking 页按钮交互 */
+        button.primary:hover {
+            background-color: var(--primary-dark);
+        }
+        button.secondary {
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+            background: transparent;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        button.secondary:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        /* 同步 Booking 页成功弹窗（和 Booking 完全一致） */
+        #successMessage {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .message-box {
+            background: #fff;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 80%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: slideUp 0.3s;
+        }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .message-box h2 { color: var(--dark); margin-bottom: 1rem; font-size: 1.5rem; }
+        .message-box p { margin-bottom: 2rem; color: var(--gray); font-size: 1rem; }
+        #closeSuccess {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        #closeSuccess:hover { background-color: #3db8af; }
+        /* 同步 Booking 页人数标签 */
+        .capacity-badge {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap" id="top">
+    <header role="banner" aria-label="Karoomba header">
+        <div class="brand">
+            <div class="logo" aria-hidden="true">K</div>
+            <div>
+                <h1 style="margin:0">Karoomba!</h1>
+                <div class="muted">Theme Parties • Events • Fun</div>
+            </div>
+        </div>
+        <nav role="navigation" aria-label="Main navigation">
+            <a href=" ">Home</a >
+            <a href="Services.html">Services</a >
+            <a href="Gallery.html">Gallery</a >
+            <a href="Events.html">Events</a >
+            <a href="Contactus.html">Contact</a >
+            <a href="Booking.html">Booking</a >
+        </nav>
+        <div class="center">
+            <button class="primary" id="open-booking" onclick="openModal()">Book Now</button>
+        </div>
+    </header>
+
+    <!-- ########## Events 主体内容（对齐 Booking 页调整）########## -->
+    <main>
+        <!-- 1. 标题简介：同步 Booking 页“主题策划”定位 -->
+        <section class="events-intro" style="margin-top: 28px; text-align: center;">
+            <h2 style="margin: 0 0 12px 0; color: var(--dark); font-size: 1.8rem;">Upcoming & Featured Events</h2>
+            <p style="max-width: 700px; margin: 0 auto; color: var(--muted);">Join our curated parties—from kids' princess adventures to adult masquerades. All match Karoomba's themed planning, with clear guest capacity and tailored setups!</p >
+        </section>
+
+        <!-- 2. 筛选栏：同步 Booking 页6大主题分类（替换原分类，完全一致） -->
+        <section class="events-filter" style="margin: 32px 0 20px; text-align: center;">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Events</button>
+                <button class="filter-btn" data-filter="children">Children's Parties</button>
+                <button class="filter-btn" data-filter="teen">Teen & Young Adult</button>
+                <button class="filter-btn" data-filter="adult">Adult Celebrations</button>
+                <button class="filter-btn" data-filter="corporate">Corporate Events</button>
+                <button class="filter-btn" data-filter="seasonal">Seasonal & Holiday</button>
+            </div>
+        </section>
+
+        <!-- 3. 活动卡片：内容同步 Booking 页“主题+人数+配置” -->
+        <section class="events-grid grid" id="events-grid">
+            <!-- 活动1：儿童主题（Princess Party - 对应 Booking 儿童分类） -->
+            <div class="card" data-type="children" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                <img src="https://via.placeholder.com/400x200?text=Princess+Party" alt="Princess Theme Party" style="border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px;">
+                <h3 style="font-size: 1.1rem; color: var(--dark);">Princess Theme Party</h3>
+                <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
+                    <span>📅 Nov 20, 2025</span>
+                    <span>⏰ 2:00 PM - 5:00 PM</span>
+                </div>
+                <p style="margin: 0 0 8px; color: var(--muted); font-size: 0.9rem;">Tiara crafts, royal games, and princess character visits—ideal for young kids!</p >
+                <div class="capacity-badge">10-20 kids (ages 3-8)</div>
+                <p style="margin: 8px 0 14px; color: var(--dark); font-size: 0.85rem; font-weight: 600;">Includes: Themed decor + 2 party facilitators</p >
+                <div style="display: flex; gap: 8px;">
+                    <button class="primary" style="flex: 1;" onclick="openModal()">Book This Event</button>
+                    <button class="secondary" style="flex: 1;">View Details</button>
+                </div>
+            </div>
+
+            <!-- 活动2：青少年主题（Neon Glow Party - 对应 Booking 青少年分类） -->
+            <div class="card" data-type="teen" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                <img src="https://via.placeholder.com/400x200?text=Neon+Glow+Party" alt="Neon Glow Theme Party" style="border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px;">
+                <h3 style="font-size: 1.1rem; color: var(--dark);">Neon Glow Party</h3>
+                <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
+                    <span>📅 Dec 05, 2025</span>
+                    <span>⏰ 7:00 PM - 10:00 PM</span>
+                </div>
+                <p style="margin: 0 0 8px; color: var(--muted); font-size: 0.9rem;">Glow sticks, DJ music, and blacklight games—perfect for teens!</p >
+                <div class="capacity-badge">30-75 people (ages 13-25)</div>
+                <p style="margin: 8px 0 14px; color: var(--dark); font-size: 0.85rem; font-weight: 600;">Includes: Glow decor + professional DJ</p >
+                <div style="display: flex; gap: 8px;">
+                    <button class="primary" style="flex: 1;" onclick="openModal()">Book This Event</button>
+                    <button class="secondary" style="flex: 1;">View Details</button>
+                </div>
+            </div>
+
+            <!-- 活动3：成人主题（Masquerade Ball - 对应 Booking 成人分类） -->
+            <div class="card" data-type="adult" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                <img src="https://via.placeholder.com/400x200?text=Masquerade+Ball" alt="Masquerade Ball Party" style="border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px;">
+                <h3 style="font-size: 1.1rem; color: var(--dark);">Masquerade Ball</h3>
+                <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
+                    <span>📅 Dec 22, 2025</span>
+                    <span>⏰ 6:00 PM - 11:00 PM</span>
+                </div>
+                <p style="margin: 0 0 8px; color: var(--muted); font-size: 0.9rem;">Elegant decor, live music, and mask favors—sophisticated adult celebration!</p >
+                <div class="capacity-badge">30-100 people (adults)</div>
+                <p style="margin: 8px 0 14px; color: var(--dark); font-size: 0.85rem; font-weight: 600;">Includes: Premium decor + live band</p >
+                <div style="display: flex; gap: 8px;">
+                    <button class="primary" style="flex: 1;" onclick="openModal()">Book This Event</button>
+                    <button class="secondary" style="flex: 1;">View Details</button>
+                </div>
+            </div>
+
+            <!-- 活动4：季节性主题（Christmas Wonderland - 对应 Booking 季节分类） -->
+            <div class="card" data-type="seasonal" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                <img src="https://via.placeholder.com/400x200?text=Christmas+Wonderland" alt="Christmas Wonderland Party" style="border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px;">
+                <h3 style="font-size: 1.1rem; color: var(--dark);">Christmas Wonderland Party</h3>
+                <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
+                    <span>📅 Dec 24, 2025</span>
+                    <span>⏰ 3:00 PM - 9:00 PM</span>
+                </div>
+                <p style="margin: 0 0 8px; color: var(--muted); font-size: 0.9rem;">Snowy decor, Santa visit, and holiday treats—for all ages!</p >
+                <div class="capacity-badge">20-80 people (family-friendly)</div>
+                <p style="margin: 8px 0 14px; color: var(--dark); font-size: 0.85rem; font-weight: 600;">Includes: Holiday decor + Santa actor</p >
+                <div style="display: flex; gap: 8px;">
+                    <button class="primary" style="flex: 1;" onclick="openModal()">Book This Event</button>
+                    <button class="secondary" style="flex: 1;">View Details</button>
+                </div>
+            </div>
+
+            <!-- 活动5：企业主题（Team Building Olympics - 对应 Booking 企业分类） -->
+            <div class="card" data-type="corporate" style="overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                <img src="https://via.placeholder.com/400x200?text=Team+Building+Olympics" alt="Corporate Team Building Event" style="border-radius: var(--radius) var(--radius) 0 0; margin-bottom: 14px;">
+                <h3 style="font-size: 1.1rem; color: var(--dark);">Team Building Olympics</h3>
+                <div style="display: flex; gap: 16px; margin: 8px 0; font-size: 0.9rem; color: var(--muted);">
+                    <span>📅 Jan 18, 2026</span>
+                    <span>⏰ 10:00 AM - 3:00 PM</span>
+                </div>
+                <p style="margin: 0 0 8px; color: var(--muted); font-size: 0.9rem;">Collaborative games, team challenges, and catered lunch—boost team spirit!</p >
+                <div class="capacity-badge">20-100 employees</div>
+                <p style="margin: 8px 0 14px; color: var(--dark); font-size: 0.85rem; font-weight: 600;">Includes: Game facilitators + catered lunch</p >
+                <div style="display: flex; gap: 8px;">
+                    <button class="primary" style="flex: 1;" onclick="openModal()">Book This Event</button>
+                    <button class="secondary" style="flex: 1;">View Details</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 定制CTA：同步 Booking 页“Creative & Unique”主题 -->
+        <section class="events-cta gallery-cta" style="margin-top: 40px;">
+            <div class="cta-card">
+                <h3>Want a Unique Event? Try Our Creative Themes!</h3>
+                <p>From Murder Mystery Nights to Outdoor Movie Parties—tell us your vision, and we’ll tailor a one-of-a-kind experience (10-80 people).</p >
+                <a href="Booking.html"><button class="primary">Plan My Creative Event</button></a >
+            </div>
+        </section>
+    </main>
+    <!-- ########## Events 主体内容结束 ########## -->
+
+</div>
+
+<!-- 1. 预约弹窗：完全同步 Booking 页表单字段（下拉主题+人数+必填项） -->
+<div id="bookingModal">
+    <div class="modal-content">
+        <button class="close-btn" id="closeModal" aria-label="Close">&times;</button>
+        <h2>Book Your Party</h2>
+        <form id="bookingForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required />
+            </div>
+
+            <div class="form-group">
+                <label for="date">Event Date</label>
+                <input type="date" id="date" name="date" required />
+            </div>
+
+            <div class="form-group">
+                <label for="partyType">Party Theme</label>
+                <select id="partyType" name="partyType" required>
+                    <option value="">Select a theme</option>
+                    <optgroup label="Children's Parties">
+                        <option value="Princess Party">Princess Party</option>
+                        <option value="Superhero Adventure">Superhero Adventure</option>
+                        <option value="Pirate Treasure Hunt">Pirate Treasure Hunt</option>
+                        <option value="Dinosaur Discovery">Dinosaur Discovery</option>
+                        <option value="Animal Safari">Animal Safari</option>
+                    </optgroup>
+                    <optgroup label="Teen & Young Adult">
+                        <option value="Gaming Tournament">Gaming Tournament</option>
+                        <option value="Beach Luau">Beach Luau</option>
+                        <option value="Hollywood Red Carpet">Hollywood Red Carpet</option>
+                        <option value="Neon Glow Party">Neon Glow Party</option>
+                        <option value="Sports Celebration">Sports Celebration</option>
+                    </optgroup>
+                    <optgroup label="Adult Celebrations">
+                        <option value="Masquerade Ball">Masquerade Ball</option>
+                        <option value="Great Gatsby 1920s">Great Gatsby 1920s</option>
+                        <option value="Tropical Paradise">Tropical Paradise</option>
+                        <option value="Wine & Cheese Tasting">Wine & Cheese Tasting</option>
+                        <option value="Casino Night">Casino Night</option>
+                    </optgroup>
+                    <optgroup label="Corporate Events">
+                        <option value="Team Building Olympics">Team Building Olympics</option>
+                        <option value="Innovation Workshop">Innovation Workshop</option>
+                        <option value="Annual Gala Dinner">Annual Gala Dinner</option>
+                        <option value="Product Launch Party">Product Launch Party</option>
+                        <option value="Holiday Office Party">Holiday Office Party</option>
+                    </optgroup>
+                    <optgroup label="Seasonal & Holiday">
+                        <option value="Christmas Wonderland">Christmas Wonderland</option>
+                        <option value="Halloween Spooktacular">Halloween Spooktacular</option>
+                        <option value="Summer Beach Bash">Summer Beach Bash</option>
+                        <option value="Spring Garden Party">Spring Garden Party</option>
+                        <option value="New Year's Eve Countdown">New Year's Eve Countdown</option>
+                    </optgroup>
+                    <optgroup label="Creative & Unique">
+                        <option value="Murder Mystery Night">Murder Mystery Night</option>
+                        <option value="Escape Room Adventure">Escape Room Adventure</option>
+                        <option value="Art & Craft Party">Art & Craft Party</option>
+                        <option value="Science Lab Experience">Science Lab Experience</option>
+                        <option value="Outdoor Movie Night">Outdoor Movie Night</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="guests">Number of Guests</label>
+                <input type="number" id="guests" name="guests" min="1" max="200" required />
+            </div>
+
+            <div class="form-group">
+                <label for="details">Additional Details</label>
+                <textarea id="details" name="details" rows="4" placeholder="Tell us more about your event..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Booking</button>
+        </form>
+    </div>
+</div>
+
+<!-- 2. Success Modal (matches Booking page style) -->
+<div id="successMessage">
+    <div class="message-box">
+        <h2>Reservation Successful!</h2>
+        <p>Thank you for your booking. We will contact you soon to confirm the details.</p >
+        <button id="closeSuccess">Close</button>
+    </div>
+</div>
+
+<!-- Footer (consistent with Booking page) -->
+<footer style="background-color: var(--dark); color: white; padding: 3rem 2rem; text-align: center; margin-top: 3rem;">
+    <div class="footer-content" style="max-width: 1200px; margin: 0 auto;">
+        <div class="brand" style="display: flex; align-items: center; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+            <div class="logo" style="width: 50px; height: 50px; background-color: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold;">K</div>
+            <div>
+                <h2 style="margin: 0; color: white;">Karoomba!</h2>
+                <div class="muted">Theme Parties • Events • Fun</div>
+            </div>
+        </div>
+
+        <div class="footer-links" style="display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; flex-wrap: wrap;">
+            <a href=" " style="color: white; text-decoration: none; transition: color 0.3s;">Home</a >
+            <a href="Services.html" style="color: white; text-decoration: none; transition: color 0.3s;">Services</a >
+            <a href="Gallery.html" style="color: white; text-decoration: none; transition: color 0.3s;">Gallery</a >
+            <a href="Events.html" style="color: white; text-decoration: none; transition: color 0.3s;">Events</a >
+            <a href="Contactus.html" style="color: white; text-decoration: none; transition: color 0.3s;">Contact</a >
+            <a href="Booking.html" style="color: white; text-decoration: none; transition: color 0.3s;">Booking</a >
+        </div>
+
+        <div class="copyright" style="margin-top: 2rem; color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">
+            &copy; 2023 Karoomba! All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript (functional consistency with Booking page) -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Restrict date to today or later
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const minDate = `${yyyy}-${mm}-${dd}`;
+        document.querySelectorAll('input[type="date"]').forEach(input => {
+            input.setAttribute('min', minDate);
+        });
+
+        // 2. Booking Modal Control
+        const bookingModal = document.getElementById('bookingModal');
+        const closeModalBtn = document.getElementById('closeModal');
+
+        window.openModal = function() {
+            bookingModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            bookingModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === bookingModal) closeModal();
+        });
+
+        // 3. Success Modal & Form Submission
+        const bookingForm = document.getElementById('bookingForm');
+        const successModal = document.getElementById('successMessage');
+        const closeSuccessBtn = document.getElementById('closeSuccess');
+
+        function showSuccess() {
+            successModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSuccess() {
+            successModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showSuccess();
+            bookingForm.reset();
+            closeModal();
+        });
+
+        closeSuccessBtn.addEventListener('click', closeSuccess);
+        window.addEventListener('click', (e) => {
+            if (e.target === successModal) closeSuccess();
+        });
+
+        // 4. Event Filter Functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Toggle active state
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                // Filter event cards
+                document.querySelectorAll('#events-grid .card').forEach(card => {
+                    if (filter === 'all' || card.dataset.type === filter) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeIn 0.5s ease';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 5. Card Hover Animation
+        document.querySelectorAll('#events-grid .card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+                card.style.boxShadow = '0 12px 24px rgba(0, 0, 0, 0.12)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.08)';
+            });
+        });
+    });
+</script>
+</body>
+</html>
