@@ -59,12 +59,9 @@
     // 4. Event Filter Functionality
     document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-    // Toggle active state
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-
     const filter = btn.dataset.filter;
-    // Filter event cards
     document.querySelectorAll('#events-grid .card').forEach(card => {
     if (filter === 'all' || card.dataset.type === filter) {
     card.style.display = 'block';

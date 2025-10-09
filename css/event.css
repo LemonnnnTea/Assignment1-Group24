@@ -1,3 +1,4 @@
+
 :root {
     --primary: #FF6B6B;
     --primary-dark: #FF5252;
@@ -8,7 +9,6 @@
     --gray: #6C757D;
     --gray-light: #F8F9FA;
 }
-/* 同步 Booking 页按钮交互 */
 button.primary:hover {
     background-color: var(--primary-dark);
 }
@@ -26,7 +26,6 @@ button.secondary:hover {
     background: var(--secondary);
     color: white;
 }
-/* 同步 Booking 页成功弹窗（和 Booking 完全一致） */
 #successMessage {
     display: none;
     position: fixed;
@@ -64,7 +63,6 @@ button.secondary:hover {
     transition: background 0.3s ease;
 }
 #closeSuccess:hover { background-color: #3db8af; }
-/* 同步 Booking 页人数标签 */
 .capacity-badge {
     background-color: var(--accent);
     color: var(--dark);
@@ -74,4 +72,64 @@ button.secondary:hover {
     font-weight: bold;
     display: inline-block;
     margin-top: 4px;
+}
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 14px;
+}
+.card h3 {
+    font-size: 1.1rem;
+    color: var(--dark);
+}
+.card .capacity-badge {
+    margin-bottom: 6px;
+}
+.card p {
+    color: var(--muted, #6C757D);
+    font-size: 0.95rem;
+}
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.filter-btn {
+    background: var(--gray-light);
+    color: var(--dark);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+.filter-btn.active, .filter-btn:hover {
+    background: var(--primary);
+    color: #fff;
+}
+@media (max-width: 900px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
 }
