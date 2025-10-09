@@ -8,7 +8,7 @@
     --primary-dark: #FF5252;
     --brand-1:#FF6B6B;
     --brand-2:#4ECDC4;
-    --dark:#0f1720;
+    --dark:#292F36;
     --muted:#6b7280;
     --bg:#fbfdff;
     --max-width:1100px;
@@ -545,4 +545,42 @@ input:focus, select:focus, textarea:focus {
 }
 .submit-btn:hover {
     background-color: var(--primary-dark);
+}
+
+/*Footer*/
+footer {
+    background-color: var(--dark);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
+}
+
+.copyright {
+    margin-top: 2rem;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
 }

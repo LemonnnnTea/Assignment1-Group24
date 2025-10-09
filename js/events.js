@@ -1,134 +1,251 @@
 
+
+    const eventsData = [
+    {
+        id: 1,
+        title: "Summer Beach Luau",
+        category: "themed",
+        date: "Aug 15, 2024",
+        time: "6:00 PM - 11:00 PM",
+        location: "Beach Park",
+        attendees: "50+ People",
+        description: "Join us for an unforgettable beach party with tropical drinks, Hawaiian music, and fun beach games. Perfect for all ages!",
+        image: "🎉"
+    },
+    {
+        id: 2,
+        title: "Mystery Masquerade Ball",
+        category: "themed",
+        date: "Sep 2, 2024",
+        time: "7:00 PM - 12:00 AM",
+        location: "Grand Ballroom",
+        attendees: "100 People",
+        description: "An evening of elegance and mystery. Wear your finest mask and enjoy classical music, dancing, and gourmet cuisine.",
+        image: "🎭"
+    },
+    {
+        id: 3,
+        title: "Epic Gaming Night",
+        category: "themed",
+        date: "Aug 25, 2024",
+        time: "5:00 PM - 2:00 AM",
+        location: "Game Center",
+        attendees: "80 People",
+        description: "Compete in various video game tournaments with amazing prizes. Food, drinks, and gaming stations provided!",
+        image: "🎮"
+    },
+    {
+        id: 4,
+        title: "Kids hero Birthday Bash",
+        category: "birthday",
+        date: "Aug 20, 2024",
+        time: "2:00 PM - 5:00 PM",
+        location: "Party Room A",
+        attendees: "25 Kids",
+        description: "Superhero-themed birthday party with costume contest, hero training activities, and super-powered fun!",
+        image: "🦸"
+    },
+    {
+        id: 5,
+        title: "Corporate Team Building",
+        category: "corporate",
+        date: "Sep 10, 2024",
+        time: "9:00 AM - 5:00 PM",
+        location: "Conference Center",
+        attendees: "40 People",
+        description: "Professional team building activities designed to enhance collaboration and communication in the workplace.",
+        image: "💼"
+    },
+    {
+        id: 6,
+        title: "Halloween Spooktacular",
+        category: "seasonal",
+        date: "Oct 31, 2024",
+        time: "7:00 PM - 12:00 AM",
+        location: "Haunted Mansion",
+        attendees: "120 People",
+        description: "Spooky Halloween party with haunted house, costume contest, and ghostly entertainment for brave souls!",
+        image: "🎃"
+    }
+    ];
+
     document.addEventListener('DOMContentLoaded', () => {
-    // 1. Restrict date to today or later
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const dd = String(today.getDate()).padStart(2, '0');
-    const minDate = `${yyyy}-${mm}-${dd}`;
-    document.querySelectorAll('input[type="date"]').forEach(input => {
-    input.setAttribute('min', minDate);
+    // Initialize events
+    initializeEvents();
+
+    // Booking button functionality
+    const openBtn = document.getElementById('open-booking');
+    openBtn.addEventListener('click', () => {
+    window.location.href = 'Booking.html';
 });
 
-    // 2. Booking Modal Control
-    const bookingModal = document.getElementById('bookingModal');
-    const closeModalBtn = document.getElementById('closeModal');
+    // Modal functionality
+    const modal = document.getElementById('joinEventModal');
+    const closeModalBtn = document.getElementById('closeJoinModal');
+    const joinForm = document.getElementById('joinEventForm');
 
-    window.openModal = function() {
-    bookingModal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    closeModalBtn.addEventListener('click', closeJoinModal);
+
+    window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+    closeJoinModal();
 }
-
-    function closeModal() {
-    bookingModal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-    closeModalBtn.addEventListener('click', closeModal);
-    window.addEventListener('click', (e) => {
-    if (e.target === bookingModal) closeModal();
 });
 
-    // 3. Success Modal & Form Submission
-    const bookingForm = document.getElementById('bookingForm');
-    const successModal = document.getElementById('successMessage');
-    const closeSuccessBtn = document.getElementById('closeSuccess');
-
-    function showSuccess() {
-    successModal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
-
-    function closeSuccess() {
-    successModal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-    bookingForm.addEventListener('submit', (e) => {
+    // Join form submission
+    joinForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    showSuccess();
-    bookingForm.reset();
-    closeModal();
+    const eventTitle = document.getElementById('modalEventTitle').textContent.replace('Join ', '');
+    showSuccessMessage(`Thank you for registering for "${eventTitle}"! We'll send you confirmation details within 24 hours.`);
+    joinForm.reset();
+    closeJoinModal();
 });
 
-    closeSuccessBtn.addEventListener('click', closeSuccess);
-    window.addEventListener('click', (e) => {
-    if (e.target === successModal) closeSuccess();
-});
+    // Success message functionality
+    document.getElementById('closeSuccess').addEventListener('click', closeSuccessMessage);
 
-    // 4. Event Filter Functionality
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    document.querySelectorAll('#events-grid .card').forEach(card => {
-    if (filter === 'all' || card.dataset.type === filter) {
-    card.style.display = 'block';
-    card.style.animation = 'fadeIn 0.5s ease';
-} else {
-    card.style.display = 'none';
+    window.addEventListener('click', (event) => {
+    if (event.target === document.getElementById('successMessage')) {
+    closeSuccessMessage();
 }
 });
 });
+
+    function initializeEvents() {
+    // Load all events initially
+    filterEvents('all');
+
+    // Setup filter buttons
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+    // Update active state
+    filterButtons.forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+
+    // Filter events
+    const category = this.getAttribute('data-category');
+    filterEvents(category);
+});
 });
 
-    // 5. Card Hover Animation
-    document.querySelectorAll('#events-grid .card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-    card.style.transform = 'translateY(-5px)';
-    card.style.boxShadow = '0 12px 24px rgba(0, 0, 0, 0.12)';
+    // Setup category cards
+    const categoryCards = document.querySelectorAll('.category-card');
+    categoryCards.forEach(card => {
+    card.addEventListener('click', function() {
+    // Update active state
+    categoryCards.forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+
+    // Update filter buttons
+    const category = this.getAttribute('data-category');
+    filterButtons.forEach(btn => {
+    if (btn.getAttribute('data-category') === category) {
+    btn.classList.add('active');
+} else {
+    btn.classList.remove('active');
+}
 });
-    card.addEventListener('mouseleave', () => {
-    card.style.transform = 'translateY(0)';
-    card.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.08)';
+
+    // Filter events
+    filterEvents(category);
 });
 });
+}
+
+    function filterEvents(category) {
+    const eventsGrid = document.getElementById('eventsGrid');
+    eventsGrid.innerHTML = '';
+
+    const filteredEvents = category === 'all'
+    ? eventsData
+    : eventsData.filter(event => event.category === category);
+
+    if (filteredEvents.length === 0) {
+    eventsGrid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--gray);">
+                    <h3>No events found in this category</h3>
+                    <p>Check back later for new events or browse other categories.</p>
+                </div>
+            `;
+    return;
+}
+
+    filteredEvents.forEach(event => {
+    const eventCard = createEventCard(event);
+    eventsGrid.appendChild(eventCard);
 });
+}
 
-    // 参考 booking.html 的弹窗处理方式
-    document.addEventListener('DOMContentLoaded', function () {
-        // 打开弹窗
-        document.getElementById('open-booking').addEventListener('click', function () {
-            document.getElementById('bookingModal').style.display = 'block';
-            // 不自动选主题
-            document.getElementById('partyType').selectedIndex = 0;
-        });
+    function createEventCard(event) {
+    const card = document.createElement('div');
+    card.className = 'event-card';
+    card.innerHTML = `
+            <div class="event-image" style="background: linear-gradient(135deg, ${getEventColor(event.category)});">
+                ${event.image} ${event.title}
+            </div>
+            <div class="event-content">
+                <div class="event-header">
+                    <div class="event-date">${event.date}</div>
+                    <div class="event-category">${getCategoryName(event.category)}</div>
+                </div>
+                <h3 class="event-title">${event.title}</h3>
+                <p class="event-description">${event.description}</p>
+                <div class="event-details">
+                    <div class="event-info">
+                        <span>⏰ ${event.time}</span>
+                        <span>📍 ${event.location}</span>
+                        <span>👥 ${event.attendees}</span>
+                    </div>
+                    <button class="event-button" onclick="openJoinModal(${event.id})">Join Event</button>
+                </div>
+            </div>
+        `;
+    return card;
+}
 
-        // 关闭弹窗
-        document.getElementById('closeModal').addEventListener('click', function () {
-            document.getElementById('bookingModal').style.display = 'none';
-        });
+    function getEventColor(category) {
+    const colors = {
+    'birthday': '#FF6B6B 0%, #FFE66D 100%',
+    'corporate': '#4ECDC4 0%, #556270 100%',
+    'seasonal': '#FF5252 0%, #FF4081 100%',
+    'themed': '#FF6B6B 0%, #4ECDC4 100%'
+};
+    return colors[category] || '#FF6B6B 0%, #4ECDC4 100%';
+}
 
-        // 关闭成功提示
-        document.getElementById('closeSuccess').addEventListener('click', function () {
-            document.getElementById('successMessage').style.display = 'none';
-        });
+    function getCategoryName(category) {
+    const names = {
+    'birthday': 'Birthday',
+    'corporate': 'Corporate',
+    'seasonal': 'Seasonal',
+    'themed': 'Themed'
+};
+    return names[category] || 'Event';
+}
 
-        // 提交表单
-        document.getElementById('bookingForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            document.getElementById('bookingModal').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
-            this.reset();
-        });
+    function openJoinModal(eventId) {
+    const event = eventsData.find(e => e.id === eventId);
+    if (event) {
+    document.getElementById('modalEventTitle').textContent = `Join ${event.title}`;
+    document.getElementById('selectedEventId').value = eventId;
+    document.getElementById('joinEventModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+}
 
-        // 支持点击“Book This Event”按钮也弹窗，并自动填入主题
-        document.querySelectorAll('.card .primary').forEach(function(btn){
-            btn.addEventListener('click', function(e){
-                e.preventDefault();
-                // 获取主题名
-                var card = btn.closest('.card');
-                var theme = card.querySelector('h3').textContent.trim();
-                document.getElementById('bookingModal').style.display = 'block';
-                // 自动选中主题
-                var select = document.getElementById('partyType');
-                for (var i = 0; i < select.options.length; i++) {
-                    if (select.options[i].value === theme) {
-                        select.selectedIndex = i;
-                        break;
-                    }
-                }
-            });
-        });
-    });
+    function closeJoinModal() {
+    document.getElementById('joinEventModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+    function showSuccessMessage(message) {
+    document.getElementById('successMessageText').textContent = message;
+    document.getElementById('successMessage').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+    function closeSuccessMessage() {
+    document.getElementById('successMessage').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
