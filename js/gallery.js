@@ -1,3 +1,4 @@
+
 function initGallery() {
     // Filter functionality - allows users to filter images by category
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -94,6 +95,67 @@ function initGallery() {
             closeLightbox();
         }
     });
+
+    // Booking modal functionality
+    const modal = document.getElementById('bookingModal');
+    const openBtn = document.getElementById('open-booking');
+    const closeModalBtn = document.getElementById('closeModal');
+    
+    if (openBtn && modal) {
+        openBtn.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    
+    if (closeModalBtn && modal) {
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+    }
+    
+    // Click outside modal to close
+    if (modal) {
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+    
+    // Form submission handling
+    const bookingForm = document.getElementById('bookingForm');
+    const successMessage = document.getElementById('successMessage');
+    const closeSuccess = document.getElementById('closeSuccess');
+    
+    if (bookingForm && successMessage) {
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (modal) modal.style.display = 'none';
+            successMessage.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            bookingForm.reset();
+        });
+    }
+    
+    if (closeSuccess && successMessage) {
+        closeSuccess.addEventListener('click', () => {
+            successMessage.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+    }
+    
+    // Click outside success message to close
+    if (successMessage) {
+        window.addEventListener('click', (e) => {
+            if (e.target === successMessage) {
+                successMessage.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
 
     console.log('Gallery functionality initialized successfully');
 }
