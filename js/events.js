@@ -1,4 +1,15 @@
 // Events Data
+document.addEventListener('DOMContentLoaded', function() {
+    // Book Now
+    const bookNowBtn = document.getElementById('open-booking');
+    if (bookNowBtn) {
+        bookNowBtn.addEventListener('click', function() {
+            window.location.href = 'booking.html';
+        });
+    }
+    
+  
+});
 const eventsData = [
     {
         id: 1,
