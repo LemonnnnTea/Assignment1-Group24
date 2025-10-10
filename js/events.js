@@ -248,3 +248,18 @@ function closeSuccessMessage() {
     document.getElementById('successMessage').style.display = 'none';
     document.body.style.overflow = 'auto';
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const ctaButtons = document.querySelectorAll('.cta-button');
+    
+    ctaButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (this.textContent.includes('Book Your Party')) {
+                window.location.href = 'booking.html';
+            } else if (this.textContent.includes('Contact Us')) {
+                window.location.href = 'contactUs.html';
+            }
+        });
+    });
+});
