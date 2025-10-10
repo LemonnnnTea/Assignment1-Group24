@@ -7,13 +7,12 @@
     <meta name="description" content="Discover upcoming events and themed parties by Karoomba! Join our exciting celebrations and create unforgettable memories." />
 
     <!-- CSS Styles -->
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/event.css" />
-
-
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="events.css" />
 </head>
 <body>
-<div class="wrap" >
+<div class="wrap" id="top">
     <header role="banner" aria-label="Karoomba header">
         <div class="brand">
             <div class="logo">K</div>
@@ -217,96 +216,7 @@
     </div>
 </footer>
 
-<div id="bookingModal">
-    <div class="modal-content">
-        <button class="close-btn" id="closeModal" aria-label="Close">&times;</button>
-        <h2>Book Your Party</h2>
-        <form id="bookingForm">
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" required />
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required />
-            </div>
-
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required />
-            </div>
-
-            <div class="form-group">
-                <label for="date">Event Date</label>
-                <input type="date" id="date" name="date" required />
-            </div>
-
-            <div class="form-group">
-                <label for="partyType">Party Theme</label>
-                <select id="partyType" name="partyType" required>
-                    <option value="">Select a theme</option>
-                    <optgroup label="Children's Parties">
-                        <option value="Princess Party">Princess Party</option>
-                        <option value="Superhero Adventure">Superhero Adventure</option>
-                        <option value="Pirate Treasure Hunt">Pirate Treasure Hunt</option>
-                        <option value="Dinosaur Discovery">Dinosaur Discovery</option>
-                        <option value="Animal Safari">Animal Safari</option>
-                    </optgroup>
-                    <optgroup label="Teen & Young Adult">
-                        <option value="Gaming Tournament">Gaming Tournament</option>
-                        <option value="Beach Luau">Beach Luau</option>
-                        <option value="Hollywood Red Carpet">Hollywood Red Carpet</option>
-                        <option value="Neon Glow Party">Neon Glow Party</option>
-                        <option value="Sports Celebration">Sports Celebration</option>
-                    </optgroup>
-                    <optgroup label="Adult Celebrations">
-                        <option value="Masquerade Ball">Masquerade Ball</option>
-                        <option value="Great Gatsby 1920s">Great Gatsby 1920s</option>
-                        <option value="Tropical Paradise">Tropical Paradise</option>
-                        <option value="Wine & Cheese Tasting">Wine & Cheese Tasting</option>
-                        <option value="Casino Night">Casino Night</option>
-                    </optgroup>
-                    <optgroup label="Corporate Events">
-                        <option value="Team Building Olympics">Team Building Olympics</option>
-                        <option value="Innovation Workshop">Innovation Workshop</option>
-                        <option value="Annual Gala Dinner">Annual Gala Dinner</option>
-                        <option value="Product Launch Party">Product Launch Party</option>
-                        <option value="Holiday Office Party">Holiday Office Party</option>
-                    </optgroup>
-                    <optgroup label="Seasonal & Holiday">
-                        <option value="Christmas Wonderland">Christmas Wonderland</option>
-                        <option value="Halloween Spooktacular">Halloween Spooktacular</option>
-                        <option value="Summer Beach Bash">Summer Beach Bash</option>
-                        <option value="Spring Garden Party">Spring Garden Party</option>
-                        <option value="New Year's Eve Countdown">New Year's Eve Countdown</option>
-                    </optgroup>
-                    <optgroup label="Creative & Unique">
-                        <option value="Murder Mystery Night">Murder Mystery Night</option>
-                        <option value="Escape Room Adventure">Escape Room Adventure</option>
-                        <option value="Art & Craft Party">Art & Craft Party</option>
-                        <option value="Science Lab Experience">Science Lab Experience</option>
-                        <option value="Outdoor Movie Night">Outdoor Movie Night</option>
-                    </optgroup>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="guests">Number of Guests</label>
-                <input type="number" id="guests" name="guests" min="1" max="200" required />
-            </div>
-
-            <div class="form-group">
-                <label for="details">Additional Details</label>
-                <textarea id="details" name="details" rows="4" placeholder="Tell us more about your event..."></textarea>
-            </div>
-
-            <button type="submit" class="submit-btn">Submit Booking</button>
-        </form>
-    </div>
-</div>
-
-<script src = "js/events.js"></script>
-
+<!-- JavaScript -->
+<script src="events.js"></script>
 </body>
 </html>
