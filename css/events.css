@@ -17,16 +17,10 @@
 }
 
 .wrap {
-    background-color: transparent; 
-    box-shadow: none; 
+    background-color: transparent;
+    box-shadow: none;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: var(--dark);
-    background-color: var(--light);
-}
 
 h1, h2, h3 {
     color: var(--dark);
